@@ -63,8 +63,15 @@
       </div>
     </div>
     
-    <div class="popular-songs-cont">
-      
+    <div class="playlist-songs-cont">
+      <div class="playlist-song-cont">
+        <img src="images/imgs/views.jpeg" alt="playlist-song-img" class="playlist-song-img">
+        <div class="playlist-song-content">
+          <p class="playlist-song-name">Feel No Ways</p>
+          <p class="playlist-song-artist">Drake</p>
+        </div>
+        <img src="images/svgs/elipsis-icon.svg" alt="" width="30px" class="elipsis-icon">
+      </div>
     </div>
     
   </div>

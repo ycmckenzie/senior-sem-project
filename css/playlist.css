@@ -171,3 +171,42 @@
   font-size: 14px;
 }
 
+.playlist-songs-cont{
+  width: 100%;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: scroll;
+}
+
+.playlist-song-cont{
+  display: flex;
+  gap: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid grey;
+  cursor: pointer;
+}
+
+.playlist-song-img{
+  width: 50px;
+  height: 100%;
+  border-radius: 2px;
+}
+
+.playlist-song-content{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.playlist-song-name{
+  font-size: 15px;
+}
+.playlist-song-artist{
+  color: var(--reg-grey);
+  font-size: 13px;
+}
+.elipsis-icon{
+  cursor: pointer;
+}

@@ -281,7 +281,7 @@ body{
   margin-top: 20px;
   width: 90%;
   text-align: center;
-  box-shadow: 0px 5px 8px 0px var(--reg-grey);
+  box-shadow: 0px 5px 5px var(--reg-grey);
   background-color: transparent;
 }
 .music-player-img{
@@ -305,7 +305,9 @@ body{
 .music-player-artist-name{
   color: var(--reg-grey);
 }
-
+.music-player-heart-icon{
+  cursor: pointer;
+}
 .music-player-controls{
   width: 100%;
   display: flex;
@@ -362,7 +364,7 @@ body{
 
 .song-volume{
   -webkit-appearance: none;
-  width: 90%;
+  width: 60%;
   height: 4px;
   background-color: black;
   border-radius: 1rem;

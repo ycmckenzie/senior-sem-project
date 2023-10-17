@@ -38,7 +38,7 @@
           <p class="music-player-song-name">Feel No Ways</p>
           <p class="music-player-artist-name">Drake</p>
         </div>
-        <img src="images/svgs/heart-icon.svg" alt="">
+        <img src="images/svgs/heart-icon.svg" alt="heart-icon" class="music-player-heart-icon">
       </div>
       <div class="music-player-controls">
         <input type="range" class="song-slider">
