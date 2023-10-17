@@ -1,0 +1,89 @@
+:root{
+  --main-blue: #3B60E4;
+  --light-grey: #e5e5e5;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+
+.discover-page-cont{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 100%;
+  margin: auto;
+  border-bottom: none;
+  background-color: white;
+  height: 100vh;
+  display: none;
+}
+
+.discover-btns-cont{
+  width: 100%;
+  margin-top: 15px;
+}
+
+.discover-btn{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+  padding-bottom: 5px;
+  cursor: pointer;
+}
+
+.discover-btn p{
+  font-weight: bold;
+}
+
+.popular-songs-cont{
+  width: 100%;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: scroll;
+}
+
+.popular-songs-header{
+  font-weight: bold;
+}
+
+.popular-song-cont{
+  display: flex;
+  gap: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid grey;
+  cursor: pointer;
+}
+
+.popular-song-img{
+  width: 50px;
+  height: 100%;
+  border-radius: 2px;
+}
+
+.popular-song-content{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.popular-song-name{
+  font-size: 15px;
+}
+.popular-song-artist{
+  color: var(--reg-grey);
+  font-size: 13px;
+}
+.elipsis-icon{
+  cursor: pointer;
+}
