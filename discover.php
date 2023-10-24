@@ -18,8 +18,24 @@
         <p class="popular-song-artist">Drake</p>
       </div>
 
-      <img src="images/svgs/elipsis-icon.svg" alt="" width="30px" class="elipsis-icon"> 
+      <img src="images/svgs/elipsis-icon.svg" alt="" width="30px" class="elipsis-icon">
+      
+      <div class="song-popup popular-song-popup">
+        <div class="close-btn popup-btn popular-song-close-btn">
+          <img src="images/svgs/x-icon.svg" alt="" width="20px">
+          <p>Close</p>
+        </div>
+        <div class="delete-cont popup-btn popular-song-add-library-btn">
+          <img src="images/svgs/plus-icon.svg" alt="" width="20px">
+          <p>Add to library</p>
+        </div>
+        <div class="add-cont popup-btn">
+          <img src="images/svgs/plus-icon.svg" alt="" width="20px">
+          <p>Add to playlist</p>
+        </div>
+      </div>
     </div>
+    
     <div class="popular-song-cont">
       <img src="images/imgs/views.jpeg" alt="" class="popular-song-img">
 
@@ -43,7 +59,7 @@
 
   </div>
 
-  <div class="popular-songs-cont">
+  <div class="popular-songs-cont recently-added-songs-cont">
     <div class="popular-songs-header">Recently Added</div>
 
     <div class="popular-song-cont">

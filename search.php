@@ -1,7 +1,7 @@
 <div class="search-page-cont">
   <div class="library-searchbar-cont">
     <img src="images/svgs/search-icon.svg" alt="search-icon" width="20px" class="search-icon">
-    <input type="text" class="library-searchbar" placeholder="Search for Songs">
+    <input type="text" class="searchbar" id="search-searchbar" placeholder="Search for Songs">
   </div>
 
   <div class="genre-cont">

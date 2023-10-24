@@ -22,6 +22,8 @@ createPlaylistBtnClose.addEventListener("click", function(){
   miniPlayer.style.display = "flex";
   mainNav.style.display = "flex";
   mainHeader.style.display = "flex";
+
+  createPlaylistErrorMessage.style.display = "none";
 })
 
 //displaying the playlist page on playlist button click
@@ -59,22 +61,32 @@ let createPlaylistForm = document.querySelector(".create-new-playlist-page");
 
 createPlaylistForm.addEventListener("submit", createPlaylist);
 
+let createPlaylistInput = document.querySelector(".create-playlist-input");
+let createPlaylistErrorMessage = document.querySelector(".input-error-message");
+
 function createPlaylist(e){
-  e.preventDefault();
+    e.preventDefault();
 
-  let playlistName = document.querySelector(".create-playlist-input").value;
-  document.querySelector(".create-playlist-input").value = "";
-  let params = "playlistName=" + playlistName;
-
-  let xhr = new XMLHttpRequest();
-  xhr.open('POST', 'php/ajax/create-playlist.php', true);
-  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-  xhr.onload = function(){
-    console.log(this.responseText);
+  if(createPlaylistInput.value == ""){
+    createPlaylistErrorMessage.style.display = "block";
   }
+  else{
+    let playlistName = document.querySelector(".create-playlist-input").value;
+    createPlaylistInput.value = "";
+    createPlaylistErrorMessage.style.display = "none";
 
-  xhr.send(params);
+    let params = "playlistName=" + playlistName;
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'php/ajax/create-playlist.php', true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    xhr.onload = function(){
+      console.log(this.responseText);
+    }
+
+    xhr.send(params);
+  }
 }
 
 

@@ -37,8 +37,8 @@
 .genre-btn{
   width: 150px;
   height: 120px;
-  color: black;
-  border: 1px solid black;
+  color: white;
+  background-image: linear-gradient(to bottom right, var(--main-blue), rgb(184, 184, 233));
   border-radius: 5px;
   text-align: center;
   font-weight: bold;

@@ -1,5 +1,6 @@
 <?php
   require_once "php/session-config.php";
+  
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +29,7 @@
     <div class="music-player">
       <div class="music-player-header">
         <img src="images/svgs/down-arrow-icon.svg" alt="down-arrow-icon" class="music-player-downarrow-icon" width="30px">
-        <img src="images/svgs/elipsis-icon.svg" alt="elipsis-icon" class="music-player-elipsis-icon" width="30px">
+        <!-- <img src="images/svgs/elipsis-icon.svg" alt="elipsis-icon" class="music-player-elipsis-icon" width="30px"> -->
       </div>
       <div class="music-player-img-cont">
         <img src="images/imgs/views.jpeg" alt="music-player-img" class="music-player-img">
@@ -53,8 +54,12 @@
       </div>
       <audio src="audio/fly.mp3" class="song"></audio>
 
-      <p class="volume-text">volume:</p>
-      <input type="range" class="song-volume">
+  
+      <div class="volume-cont">
+        <img src="images/svgs/volume-off-icon.svg" alt="" width="25px" class="song-volume-icon">
+        <input type="range" class="song-volume">
+        <img src="images/svgs/volume-on-icon.svg" alt="" width ="25px" class="song-volume-icon">
+      </div>
     </div>
 
     <?php

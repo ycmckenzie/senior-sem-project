@@ -1,7 +1,7 @@
 <div class="playlist-page-cont">
   <div class="library-searchbar-cont">
     <img src="images/svgs/search-icon.svg" alt="search-icon" width="20px" class="search-icon">
-    <input type="text" class="library-searchbar" placeholder="Search for Playlists">
+    <input type="text" class="searchbar" id="playlist-searchbar" placeholder="Search for Playlists">
   </div>
 
   <div class="create-playlist-btn-cont">
@@ -35,6 +35,7 @@
     <div class="new-playlist-content">
       <label for="new-playlist-input" class="create-prompt">Create new playlist: </label>
       <input type="text" name="new-playlist-input" placeholder="Playlist Name" class="create-playlist-input">
+      <p class="input-error-message">Must create playlist name!</p>
       <button class="create-new-playlist-btn">Create</button>
     </div>
   </form>
@@ -58,8 +59,8 @@
     <div class="button-cont">
       <div class="song-message">Songs</div>
       <div class="buttons">
-        <img src="images/svgs/play-icon.svg" alt="play-icon" width="45px" class="play-icon">
-        <img src="images/svgs/shuffle-icon.svg" alt="shuffle-icon" width="35px" class="shuffle-icon">
+        <img src="images/svgs/play-icon.svg" alt="play-icon" width="45px" class="play-icon" id="playlist-play-icon">
+        <img src="images/svgs/shuffle-icon.svg" alt="shuffle-icon" width="35px" class="shuffle-icon" id="playlist-shuffle-icon">
       </div>
     </div>
     

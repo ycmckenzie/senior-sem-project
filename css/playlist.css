@@ -51,6 +51,9 @@
   height: 40px;
   margin-top: 15px;
 }
+.create-playlist-page-back-icon{
+  cursor: pointer;
+}
 .new-playlist-content{
   display: flex;
   flex-direction: column;
@@ -70,6 +73,13 @@
   border: 2px solid black;
   border-radius: 5px;
   padding-left: 5px;
+}
+.input-error-message{
+  color: red;
+  font-size: 12px;
+  width: 100%;
+  text-align: center;
+  display: none;
 }
 .create-new-playlist-btn{
   width: 150px;

@@ -52,3 +52,4 @@
     header("Location: ../signup.php");
     die();
   }
+  
