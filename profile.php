@@ -13,7 +13,7 @@
     <div class="profile-joined-date">Joined October 2023</div>
   </div>
 
-  <div class="logout-btn-cont">
-    <div class="logout-btn">Log out</div>
-  </div>
+  <form action="php/logout.php" method="POST" class="logout-btn-cont">
+    <button class="logout-btn">Log out</button>
+  </form>
 </div>

@@ -47,6 +47,106 @@
   align-items: center;
   cursor: pointer;
 }
+.genre-spec{
+  display: none;
+}
+.display-genre-songs-page{
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: none;
+  background-color: white;
+  flex-direction: column;
+  overflow-y: hidden;
+}
 
+.display-genre-songs-header{
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  align-items: center;
+  margin-top: 15px;
+}
 
+.display-genre-songs-back-btn{
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+}
+
+.display-genre-songs-header-text{
+  font-size: 25px;
+  font-weight: bold;
+}
+.genre-songs-cont{
+  width: 100%;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: scroll;
+  min-height: 100vh;
+}
+
+.genre-song-cont{
+  display: flex;
+  gap: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid grey;
+  cursor: pointer;
+  position: relative;
+}
+.genre-song-img{
+  width: 50px;
+  height: 100%;
+  border-radius: 2px;
+}
+.genre-song-content{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.genre-song-name{
+  font-size: 15px;
+}
+.genre-song-artist{
+  color: var(--reg-grey);
+  font-size: 13px;
+}
+.genre-song-genre{
+  display: none;
+}
+
+.elipsis-icon{
+  cursor: pointer;
+}
+.genre-song-popup{
+  position: absolute;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 5px;
+  right: 0;
+  display: none;
+  flex-direction: column;
+  z-index: 1;
+}
+
+.popup-btn{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 35px;
+  border-bottom: 1px solid black;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.genre-add-lib-btn{
+  border-bottom: none;
+}
 

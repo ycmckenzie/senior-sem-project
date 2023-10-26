@@ -1,4 +1,5 @@
 <?php
-  function getLibrarySongs($pdo, $userId){
-   getLibrarySongs($pdo, $userId);
+
+  function requestLibrarySongs($pdo, $userId){
+   return getLibrarySongs($pdo, $userId);
   }

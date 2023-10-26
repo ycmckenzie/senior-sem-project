@@ -1,6 +1,9 @@
 let profileBtn = document.querySelector(".profile-icon");
 let profilePageCont = document.querySelector(".profile-page-cont");
 
+//displaying the profile page on button click
+//hiding miniplayer, nav, header
+
 profileBtn.addEventListener("click", function(){
   profilePageCont.style.display = "flex";
   miniPlayer.style.display = "none";
@@ -9,6 +12,9 @@ profileBtn.addEventListener("click", function(){
   mainCont.style.height = "100vh";
   mainCont.style.overflowY = "hidden";
 })
+
+//hiding the profile page on button click
+//displaying miniplayer, nav, header
 
 let profileBackBtn = document.querySelector('.profile-back-arrow-icon');
 

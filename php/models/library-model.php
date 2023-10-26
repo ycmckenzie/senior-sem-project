@@ -1,8 +1,4 @@
 <?php
-  include_once "../conn.php";
-  include_once "../session-config.php";
-
-  $userId = $_SESSION["userId"];
   
   function getLibrarySongs($pdo, $userId){
     $query = "SELECT * FROM songs 
@@ -18,26 +14,11 @@
 
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    return $result; 
+    return $result;
+    
+    $pdo = null;
+    $stmt = null;
+    die();
   }
-
-  $results = getLibrarySongs($pdo, $userId);
-
-  print_r($results); 
-  echo $results[0]["song_image_path"];
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <img src="../../song-content/<?php echo $results[0]["song_image_path"]?>" alt="">
-  <audio src="../../song-content/<?php echo $results[0]["song_audio_path"]?>" controls></audio>
-</body>
-</html>
 
   

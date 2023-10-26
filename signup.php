@@ -1,7 +1,6 @@
 <?php
   include_once "php/session-config.php";
   include_once "php/views/entry-view.php";
-  
 ?>
 
 <!DOCTYPE html>

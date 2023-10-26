@@ -128,3 +128,17 @@ popupCloseBtns.forEach(btn => {
   })
 })
 
+let librarySongs = document.querySelectorAll(".song-play-btn");
+
+let miniPlayerImg = document.querySelector(".mini-player-img");
+let musicPlayerImg = document.querySelector(".music-player-img");
+
+librarySongs.forEach(song => {
+  song.addEventListener("click", function(){
+    let songSrc = song.previousElementSibling.src
+    let newSrc = songSrc.substring(40, songSrc.length)
+
+    miniPlayerImg.src = newSrc;
+    musicPlayerImg.src = newSrc;
+  })
+})

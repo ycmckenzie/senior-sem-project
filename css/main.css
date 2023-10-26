@@ -139,6 +139,12 @@ body{
   height: 100%;
   border-radius: 2px;
 }
+.song-play-btn{
+  position: absolute;
+  left: 0;
+  height: 100%;
+  width: 90%;
+}
 .song-content{
   flex: 1;
   display: flex;

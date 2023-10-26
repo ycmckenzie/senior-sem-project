@@ -81,10 +81,6 @@ function createPlaylist(e){
     xhr.open('POST', 'php/ajax/create-playlist.php', true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-    xhr.onload = function(){
-      console.log(this.responseText);
-    }
-
     xhr.send(params);
   }
 }

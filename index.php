@@ -1,6 +1,10 @@
 <?php
-  require_once "php/session-config.php";
-  
+    require_once "php/conn.php";
+    require_once "php/session-config.php";
+
+    if (!isset($_SESSION["userId"])){
+      header("Location: login.php");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -79,6 +83,7 @@
   </div>
   <script src="js/main.js"></script>
   <script src="js/playlist.js"></script>
+  <script src="js/search.js"></script>
   <script src="js/profile.js"></script>
 </body>
 </html>

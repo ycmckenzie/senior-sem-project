@@ -1,5 +1,4 @@
 <?php
-
   function insertPlaylist($pdo, $userId, $playlistName){
     $query = "INSERT INTO playlists (users_id, playlist_name) 
       VALUES (:users_id, :playlist_name);";
