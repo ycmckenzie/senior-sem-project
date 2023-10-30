@@ -3,7 +3,7 @@
   include_once "php/controllers/search-contr.php";
 
   $genreSongs = requestGenreSongs($pdo);
-
+  
   function displayGenreSongs($genreSongs){
     foreach($genreSongs as $song){
       ?>

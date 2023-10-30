@@ -37,6 +37,9 @@
             </div>
           </div>
 
+          <div class="song-audio-src">
+            <?php echo $song["song_audio_path"];?>
+          </div>
         </div>
       <?php
     }

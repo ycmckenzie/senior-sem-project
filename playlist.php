@@ -1,3 +1,7 @@
+<?php
+  include_once "php/views/playlist-view.php";
+?>
+
 <div class="playlist-page-cont">
   <div class="library-searchbar-cont">
     <img src="images/svgs/search-icon.svg" alt="search-icon" width="20px" class="search-icon">
@@ -9,22 +13,7 @@
   </div>
 
   <div class="playlist-btns-cont">
-    <div class="playlist">
-      <div class="playlist-img-cont">
-        <img src="images/svgs/playlists-icon.svg" alt="playlist-img"class="playlist-img">
-      </div>
-      <p class="playlist-name">Playlist Name</p>
-
-      <img src="images/svgs/right-arrow-icon.svg" alt="right-arrow">
-    </div>
-    <div class="playlist">
-      <div class="playlist-img-cont">
-        <img src="images/svgs/playlists-icon.svg" alt="playlist-img"class="playlist-img">
-      </div>
-      <p class="playlist-name">Playlist Name</p>
-
-      <img src="images/svgs/right-arrow-icon.svg" alt="right-arrow">
-    </div>
+    <?php displayPlaylists($playlistsInfo) ?>
   </div>
 
   <form class="create-new-playlist-page">
@@ -46,13 +35,15 @@
     </div>
 
     <div class="playlist-page-content">
-      <div class="playlist-page-img-cont">
-        <img src="images/imgs/views.jpeg" alt="playlist-img" class="playlist-page-img">
+
+      <div class="playlist-page-default-img-cont">
+        <img src="images/svgs/playlists-icon.svg" alt="" class="playlist-page-default-img">
       </div>
 
       <div class="playlist-page-info">
-        <p class="playlist-name">Playlist Name</p>
-        <p class="playlist-user">User Name</p>
+        <p class="playlist-page-name"></p>
+        <?php displayUsername($username)?>
+        <img src="images/svgs/elipsis-icon.svg" alt="elipsis-icon" width="35px" class="playlist-option-btn">
       </div>
     </div>
 
@@ -65,14 +56,7 @@
     </div>
     
     <div class="playlist-songs-cont">
-      <div class="playlist-song-cont">
-        <img src="images/imgs/views.jpeg" alt="playlist-song-img" class="playlist-song-img">
-        <div class="playlist-song-content">
-          <p class="playlist-song-name">Feel No Ways</p>
-          <p class="playlist-song-artist">Drake</p>
-        </div>
-        <img src="images/svgs/elipsis-icon.svg" alt="" width="30px" class="elipsis-icon">
-      </div>
+      <?php displayPlaylistSongs($playlistSongs);?>
     </div>
     
   </div>

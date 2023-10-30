@@ -16,7 +16,7 @@
       <p class="btn-text">Hip-Hop</p>
     </div>
     <div class="genre-btn rnb-genre-btn">
-      <p class="genre-spec">RandB</p>
+      <p class="genre-spec">RnB</p>
       <p class="btn-text">R&B</p>
     </div>
     <div class="genre-btn country-genre-btn">

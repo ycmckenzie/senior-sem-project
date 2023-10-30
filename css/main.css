@@ -183,6 +183,9 @@ body{
 .add-cont{
   border-bottom: none;
 }
+.song-audio-src{
+  display: none;
+}
 .mini-player{
   width: 100%;
   height: 60px;
@@ -198,23 +201,61 @@ body{
   border-bottom: 2px solid black;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   cursor: pointer;
+}
+
+.mini-player-open-btn{
+  display: flex;
+  align-items: center;
+  height: 100%;
+  flex: 1;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .mini-player-img{
   width: 50px;
   height: 50px;
   border-radius: 2px;
+  display: none;
+  align-items: center;
+  cursor: pointer;
 }
+
+.mini-player-default-img-cont{
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: baseline;
+  align-items: center;
+  border: 1px solid var(--main-blue);
+  border-radius: 5px;
+  padding-left: 2px;
+}
+
+.mini-player-default-img{
+  width: 40px;
+  filter: invert(42%) sepia(55%) saturate(6611%) hue-rotate(220deg) brightness(93%) contrast(92%);
+}
+
+.mini-player-default-message{
+  font-weight: bold;
+  font-size: 13px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .mini-player-content{
   display: flex;
   flex-direction: column;
   align-items: center;
   flex: 1;
+  display: none;
 }
 .mini-player-song-name{
   font-size: 13px;
+  text-align: center
 }
 
 .mini-player-artist-name{
@@ -290,13 +331,35 @@ body{
   box-shadow: 0px 5px 5px var(--reg-grey);
   background-color: transparent;
   border-radius: 5px;
+  display: none;
 }
+.music-player-default-img-cont{
+  margin-top: 20px;
+  width: 90%;
+  box-shadow: 0px 5px 5px var(--reg-grey);
+  background-color: transparent;
+  border-radius: 5px;
+  border: 2px solid var(--main-blue);
+  display: flex;
+  justify-content: baseline;
+  align-items: center;
+}
+
 .music-player-img{
   width: 100%;
   height: 100%;
   background-color: none;
   border-radius: 5px;
 }
+
+.music-player-default-img{
+  width: 90%;
+  height: 90%;
+  background-color: none;
+  border-radius: 5px;
+  filter: invert(42%) sepia(55%) saturate(6611%) hue-rotate(220deg) brightness(93%) contrast(92%);
+}
+
 .music-player-content{
   display: flex;
   width: 100%;
@@ -305,6 +368,12 @@ body{
   margin-top: 30px;
   padding-left: 10px;
   padding-right: 10px;
+}
+.music-player-song-info{
+  display: none;
+}
+.music-player-default-message{
+  font-weight: bold;
 }
 .music-player-song-name{
   font-size: 17px;

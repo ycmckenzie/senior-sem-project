@@ -121,12 +121,14 @@
 }
 .playlist-img{
   width: 40px;
-  border-radius: 5px;
   filter: invert(42%) sepia(55%) saturate(6611%) hue-rotate(220deg) brightness(93%) contrast(92%);
 }
 .playlist-name{
   flex: 1;
   font-size: 15px;
+}
+.playlist-id{
+  display: none;
 }
 
 .playlist-page{
@@ -166,10 +168,25 @@
   height: 150px;
 }
 
+
 .playlist-page-img{
   width: 100%;
   height: 100%;
   border-radius: 5px;
+}
+
+.playlist-page-default-img-cont{
+  width: 150px;
+  height: 150px;
+  border: 2px solid var(--main-blue);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.playlist-page-default-img{
+  width: 90%;
+  filter: invert(42%) sepia(55%) saturate(6611%) hue-rotate(220deg) brightness(93%) contrast(92%);
 }
 
 .playlist-name{
@@ -187,6 +204,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  height: 100vh;
   overflow-y: scroll;
 }
 
@@ -219,4 +237,8 @@
 }
 .elipsis-icon{
   cursor: pointer;
+}
+
+.song-playlist-id{
+  display: none;
 }

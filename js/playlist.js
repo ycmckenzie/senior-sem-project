@@ -85,4 +85,33 @@ function createPlaylist(e){
   }
 }
 
+let playlistName = document.querySelector(".playlist-page-name");
+
+playlistBtns.forEach(btn => {
+  btn.addEventListener("click", function(){
+    playlistName.innerText = btn.firstElementChild.nextElementSibling.innerText;
+  })
+})
+
+let playlistId;
+let playlistSongs = document.querySelectorAll(".playlist-song-cont");
+
+playlistBtns.forEach(btn => {
+  btn.addEventListener("click", function(){
+    playlistId = btn.lastElementChild.innerText;
+
+    playlistSongs.forEach(song => {
+      let songPlaylistId = song.lastElementChild.previousElementSibling.innerText;
+
+      if(playlistId == songPlaylistId){
+        song.style.display = "flex";
+      }
+      else{
+        song.style.display = "none";
+      }
+    })
+
+  })
+})
+
 

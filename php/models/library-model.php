@@ -15,10 +15,6 @@
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     return $result;
-    
-    $pdo = null;
-    $stmt = null;
-    die();
   }
 
   

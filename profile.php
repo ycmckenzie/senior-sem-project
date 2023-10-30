@@ -1,3 +1,7 @@
+<?php
+  include_once "php/views/profile-view.php";
+?>
+
 <div class="profile-page-cont">
   <div class="profile-page-header">
     <img src="images/svgs/back-arrow-icon.svg" alt="back-arrow-icon" class="profile-back-arrow-icon" width="30px">
@@ -9,8 +13,7 @@
   </div>
 
   <div class="profile-content">
-    <div class="profile-user-name">John Doe</div>
-    <div class="profile-joined-date">Joined October 2023</div>
+    <?php displayUserInfo($userInfo, $joinedDate);?>
   </div>
 
   <form action="php/logout.php" method="POST" class="logout-btn-cont">

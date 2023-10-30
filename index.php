@@ -35,16 +35,26 @@
         <img src="images/svgs/down-arrow-icon.svg" alt="down-arrow-icon" class="music-player-downarrow-icon" width="30px">
         <!-- <img src="images/svgs/elipsis-icon.svg" alt="elipsis-icon" class="music-player-elipsis-icon" width="30px"> -->
       </div>
+
       <div class="music-player-img-cont">
         <img src="images/imgs/views.jpeg" alt="music-player-img" class="music-player-img">
       </div>
+
+      <div class="music-player-default-img-cont">
+        <img src="images/svgs/playlists-icon.svg" alt="" class="music-player-default-img">
+      </div>
+
       <div class="music-player-content">
         <div class="music-player-song-info">
           <p class="music-player-song-name">Feel No Ways</p>
           <p class="music-player-artist-name">Drake</p>
         </div>
+        <div class="music-player-default-message">
+          Not Playing
+        </div>
         <img src="images/svgs/heart-icon.svg" alt="heart-icon" class="music-player-heart-icon">
       </div>
+
       <div class="music-player-controls">
         <input type="range" class="song-slider">
         <div class="music-player-btns">
@@ -56,14 +66,15 @@
           <img src="images/svgs/skip-icon.svg" alt="skip-icon" class="music-player-skip-icon" width="50px">
         </div>
       </div>
-      <audio src="audio/fly.mp3" class="song"></audio>
 
+      <audio src="" class="music-player-song"></audio>
   
       <div class="volume-cont">
         <img src="images/svgs/volume-off-icon.svg" alt="" width="25px" class="song-volume-icon">
-        <input type="range" class="song-volume">
+        <input type="range" class="song-volume" min="0" max="1" step=".01">
         <img src="images/svgs/volume-on-icon.svg" alt="" width ="25px" class="song-volume-icon">
       </div>
+
     </div>
 
     <?php

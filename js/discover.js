@@ -2,6 +2,6 @@
 
 let discoverGenreBtn = document.querySelector(".genre-discover-btn");
 
-discoverGenreBtnenreBtn.addEventListener("click", function(){
+discoverGenreBtn.addEventListener("click", function(){
   console.log("clciked");
 })
