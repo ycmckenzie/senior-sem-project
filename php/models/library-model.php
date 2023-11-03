@@ -17,4 +17,29 @@
     return $result;
   }
 
-  
+  function checkSongInLibrary($pdo, $userId, $songId){
+    $query = "SELECT * FROM libraries WHERE users_id = :userId 
+      AND song_id = :songId;";
+
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":userId", $userId);
+    $stmt->bindParam(":songId", $songId);
+
+    $stmt->execute();
+
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $result;
+  }
+
+  function insertLibrarySong($pdo, $userId, $songId){
+    $query = "INSERT INTO libraries (users_id, song_id) 
+      values (:userId, :songId);";
+    
+    $stmt = $pdo->prepare($query);
+
+    $stmt->bindParam(":userId", $userId);
+    $stmt->bindParam(":songId", $songId);
+
+    $stmt->execute();
+  }

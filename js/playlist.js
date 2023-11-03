@@ -10,6 +10,15 @@ createPlaylistBtn.addEventListener("click", function(){
   miniPlayer.style.display = "none";
   mainNav.style.display = "none";
   mainHeader.style.display = "none";
+
+  playlistXBtn.style.display = "none";
+  playlistSearchbar.value = "";
+  playlistNoResultsMessage.style.display = "none"
+
+  playlists.forEach(playlist => {
+    playlist.style.display = "flex";
+  })
+
 })
 
 //hiding the create playlist page on button click
@@ -82,6 +91,7 @@ function createPlaylist(e){
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
     xhr.send(params);
+    
   }
 }
 
@@ -114,4 +124,55 @@ playlistBtns.forEach(btn => {
   })
 })
 
+let playlistSearchbar = document.querySelector("#playlist-searchbar");
+let playlistXBtn = document.querySelector("#playlist-x-btn");
+let playlists = document.querySelectorAll(".playlist");
+let playlistSearchbarValue;
+let playlistNoResultsMessage = document.querySelector(".playlist-no-results-message")
+let numPlaylistResults;
+
+playlistSearchbar.addEventListener("keyup", function(){
+  playlistSearchbarValue = (playlistSearchbar.value).toLowerCase().trim();
+  numPlaylistResults = 0;
+
+  playlists.forEach(playlist => {
+    let playlistName = (playlist.firstElementChild.nextElementSibling.innerText).toLowerCase();
+      
+    if(playlistName.includes(playlistSearchbarValue)){
+      playlist.style.display = "flex";
+      numPlaylistResults++;
+    }
+    else{
+      playlist.style.display = "none";
+    }
+  })
+
+    if(playlistSearchbarValue.length <= 0){
+      playlistXBtn.style.display = "none";
+      playlistNoResultsMessage.style.display = "none";
+    }
+    else{
+      playlistXBtn.style.display = "block";
+    }
+
+  if(numPlaylistResults == 0){
+    playlistNoResultsMessage.style.display = "block";
+  }
+  else{
+    playlistNoResultsMessage.style.display = "none";
+  }
+
+})
+
+
+
+playlistXBtn.addEventListener("click", function(){
+  playlistXBtn.style.display = "none";
+  playlistSearchbar.value = "";
+  playlistNoResultsMessage.style.display = "none"
+
+  playlists.forEach(playlist => {
+    playlist.style.display = "flex";
+  })
+})
 

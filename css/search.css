@@ -25,6 +25,33 @@
   display: none;
 }
 
+.search-searchbar-cont{
+  width: 100%;
+  height: 60px;
+  text-align: center;
+  position: relative;
+  margin-top: 5px;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 2;
+  border-bottom: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-songs-cont{
+  width: 100%;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  display: none;
+  max-height: 100vh;
+}
+
 .genre-cont{
   width: 100%;
   display: flex;
@@ -83,6 +110,8 @@
   font-size: 25px;
   font-weight: bold;
 }
+
+
 .genre-songs-cont{
   width: 100%;
   margin-top: 15px;
@@ -150,3 +179,9 @@
   border-bottom: none;
 }
 
+.search-no-results-message{
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  display: none;
+}

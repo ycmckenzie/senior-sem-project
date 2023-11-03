@@ -50,7 +50,6 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  overflow-y: scroll;
 }
 
 .popular-songs-header{
@@ -87,4 +86,19 @@
 }
 .elipsis-icon{
   cursor: pointer;
+}
+
+.random-song-cont, .recent-song-cont{
+  display: flex;
+  gap: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid grey;
+  cursor: pointer;
+  position: relative;
+}
+
+.recently-added-songs, .random-songs{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }

@@ -11,10 +11,10 @@
     $userId = $_SESSION["userId"];
     $playlistName = $_POST["playlistName"];
 
-
     createPlaylist($pdo, $userId, $playlistName);
 
     $pdo = null;
     $stmt = null;
     die();
+    unset($_POST["playlistName"]);
   }

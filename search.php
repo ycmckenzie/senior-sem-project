@@ -3,9 +3,10 @@
 ?>
 
 <div class="search-page-cont">
-  <div class="library-searchbar-cont">
+  <div class="search-searchbar-cont">
     <img src="images/svgs/search-icon.svg" alt="search-icon" width="20px" class="search-icon">
     <input type="text" class="searchbar" id="search-searchbar" placeholder="Search for Songs">
+    <img src="images/svgs/x-icon.svg" alt="x" class="searchbar-x-btn" id="search-x-btn">
   </div>
 
   <div class="genre-cont">
@@ -28,13 +29,13 @@
     <div class="genre-btn indie-genre-btn">
       <p class="btn-text">Indie</p>
     </div>
-    <div class="genre-btn coming-genre-btn">
-      <p class="btn-text">Coming Soon...</p>
-    </div>
-    <div class="genre-btn coming-genre-btn">
-      <p class="btn-text">Coming Soon...</p>
-    </div>
   </div>
+
+  <div class="search-songs-cont">
+    <?php displaySearchSongs($genreSongs);?>
+  </div>
+
+  <div class="search-no-results-message">No Results</div>
 
   <div class="display-genre-songs-page">
     <div class="display-genre-songs-header">

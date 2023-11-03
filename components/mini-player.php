@@ -14,7 +14,10 @@
   </div>
       
   <div class="mini-player-btns">
-    <img src="images/svgs/pause-icon.svg" alt="pause-icon" class="mini-player-pause-btn" width="35">
+    <div class="mini-player-pause-start-cont">
+      <img src="images/svgs/pause-icon.svg" alt="pause-icon" class="mini-player-pause-btn" width="35">
+      <img src="images/svgs/start-icon.svg" alt="play-icon" class="mini-player-play-btn" width="30">
+    </div>
     <img src="images/svgs/skip-icon.svg" alt="skip-icon" class="mini-player-skip-btn" width="33">
   </div>
 </div>

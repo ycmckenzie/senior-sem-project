@@ -6,6 +6,7 @@
   <div class="library-searchbar-cont">
     <img src="images/svgs/search-icon.svg" alt="search-icon" width="20px" class="search-icon">
     <input type="text" class="searchbar" id="playlist-searchbar" placeholder="Search for Playlists">
+    <img src="images/svgs/x-icon.svg" alt="x" class="searchbar-x-btn" id="playlist-x-btn">
   </div>
 
   <div class="create-playlist-btn-cont">
@@ -13,7 +14,11 @@
   </div>
 
   <div class="playlist-btns-cont">
-    <?php displayPlaylists($playlistsInfo) ?>
+    <?php displayPlaylists($playlistsInfo); ?>
+  </div>
+
+  <div class="playlist-no-results-message">
+    No Results
   </div>
 
   <form class="create-new-playlist-page">

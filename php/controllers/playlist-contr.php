@@ -14,3 +14,12 @@
   function requestPlaylistSongs($pdo, $userId){
     return getPlaylistSongs($pdo, $userId);
   }
+
+  function songAlreadyInserted($pdo, $userId, $songId, $playlistId){
+    return checkSongInserted($pdo, $userId, $songId, $playlistId);
+  }
+
+  function addPlaylistSong($pdo, $userId, $songId, $playlistId){
+    insertPlaylistSong($pdo, $userId, $songId, $playlistId);
+  }
+

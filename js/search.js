@@ -42,7 +42,7 @@ genreBtns.forEach(btn => {
     currentGenre = btn.firstElementChild.innerText;
 
     genreSongs.forEach(song => {
-      if (song.firstElementChild.innerText == currentGenre){
+      if (song.lastElementChild.previousElementSibling.innerText == currentGenre){
         song.style.display = "flex";
       }
       else{
@@ -51,6 +51,68 @@ genreBtns.forEach(btn => {
     })
   })
 })
+
+//hide genre buttons, display songs on key up click
+
+let searchSearchbar = document.querySelector("#search-searchbar");
+let searchXBtn = document.querySelector("#search-x-btn");
+let genreBtnCont = document.querySelector(".genre-cont");
+let searchSongCont = document.querySelector(".search-songs-cont");
+let searchSongs = document.querySelectorAll(".search-song-cont");
+let searchSearchbarValue;
+let noResultsMessage = document.querySelector(".search-no-results-message")
+let numResults;
+
+searchSearchbar.addEventListener("keyup", function(){
+  searchSearchbarValue = (searchSearchbar.value).toLowerCase().trim();
+  numResults = 0;
+
+  searchSongs.forEach(song => {
+    let songName = (song.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText).toLowerCase();
+    let songArtist = (song.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText).toLowerCase()
+      
+    if(songName.includes(searchSearchbarValue) || songArtist.includes(searchSearchbarValue)){
+      song.style.display = "flex";
+      numResults++;
+    }
+    else{
+      song.style.display = "none";
+    }
+  })
+
+    if(searchSearchbarValue.length <= 0){
+      searchXBtn.style.display = "none";
+      genreBtnCont.style.display = "flex";
+      searchSongCont.style.display = "none";
+      noResultsMessage.style.display = "none";
+    }
+    else{
+      searchXBtn.style.display = "block";
+      genreBtnCont.style.display = "none";
+      searchSongCont.style.display = "flex";
+    }
+
+  if(numResults == 0){
+    noResultsMessage.style.display = "block";
+  }
+  else{
+    noResultsMessage.style.display = "none";
+  }
+
+})
+
+
+
+searchXBtn.addEventListener("click", function(){
+  searchXBtn.style.display = "none";
+  genreBtnCont.style.display = "flex";
+  searchSongCont.style.display = "none";
+  searchSearchbar.value = "";
+  noResultsMessage.style.display = "none"
+})
+
+
+
 
 
 

@@ -6,6 +6,7 @@
   <div class="library-searchbar-cont">
     <img src="images/svgs/search-icon.svg" alt="search-icon" width="20px" class="search-icon">
     <input type="text" class="searchbar" id="library-searchbar" placeholder="Search for Songs">
+    <img src="images/svgs/x-icon.svg" alt="x" class="searchbar-x-btn" id="library-x-btn">
   </div>
 
   <div class="button-cont">
@@ -16,7 +17,12 @@
     </div>
   </div>
 
+  <div class="library-no-results-message">
+    No Results
+  </div>
+
   <div class="songs-cont">
     <?php displayLibrarySongs($songs)?>
-  </div>  
+  </div> 
+
 </div>

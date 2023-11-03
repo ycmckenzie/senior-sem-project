@@ -29,6 +29,14 @@
     <?php
       include_once "components/header.php";
     ?>
+
+    <?php
+      include_once "library.php";
+      include_once "playlist.php";
+      include_once "discover.php";
+      include_once "search.php";
+      include_once "profile.php";
+    ?>
     
     <div class="music-player">
       <div class="music-player-header">
@@ -77,14 +85,26 @@
 
     </div>
 
-    <?php
-      include_once "library.php";
-      include_once "playlist.php";
-      include_once "discover.php";
-      include_once "search.php";
-      include_once "profile.php";
-    ?>
+    <div class="add-song-to-playlist-page">
+      <div class="add-song-to-playlist-page-header">
+        <img src="images/svgs/back-arrow-icon.svg" alt="down-arrow-icon" class="add-song-playlist-page-back-arrow" width="30px">
+      </div>
+      <div class="add-song-to-playlist-page-message">
+        Choose a playlist:
+      </div>
+      <div class="add-playlists-cont">
+        <?php displaySelectionPlaylists($playlistsInfo) ?>
+      </div>
 
+      <div class="add-playlist-success-fail-message"></div>
+
+      <div class="add-song-playlist-submit-btn-cont">
+        <button class="add-song-playlist-submit-btn">Add to playlist</button>
+      </div>
+
+    </div>
+
+    <div class="add-song-library-success-fail-message">hey</div>
 
     <?php
       include_once "components/mini-player.php";

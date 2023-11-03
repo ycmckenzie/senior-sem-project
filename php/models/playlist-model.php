@@ -50,3 +50,33 @@
 
     return $result;
   }
+
+  function checkSongInserted($pdo, $userId, $songId, $playlistId){
+    $query = "SELECT * FROM playlist_songs WHERE users_id = :userId AND 
+      song_id = :songId AND playlist_id = :playlistId;";
+
+    $stmt = $pdo->prepare($query);
+
+    $stmt->bindParam(":userId", $userId);
+    $stmt->bindParam(":songId", $songId);
+    $stmt->bindParam(":playlistId", $playlistId);
+
+    $stmt->execute();
+    
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $result;
+  }
+
+  function insertPlaylistSong($pdo, $userId, $songId, $playlistId){
+    $query = "INSERT INTO playlist_songs (users_id, song_id, playlist_id) 
+      values (:userId, :songId, :playlistId);";
+    
+    $stmt = $pdo->prepare($query);
+
+    $stmt->bindParam(":userId", $userId);
+    $stmt->bindParam(":songId", $songId);
+    $stmt->bindParam(":playlistId", $playlistId);
+
+    $stmt->execute();
+  }
