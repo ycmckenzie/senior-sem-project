@@ -80,3 +80,28 @@
 
     $stmt->execute();
   }
+
+  function deletePlaylistSong($pdo, $userId, $songId, $playlistId){
+    $query = "DELETE FROM playlist_songs WHERE users_id = :userId 
+      AND song_id = :songId AND playlist_id = :playlistId;";
+
+    $stmt = $pdo->prepare($query);
+
+    $stmt->bindParam(":userId", $userId);
+    $stmt->bindParam(":songId", $songId);
+    $stmt->bindParam(":playlistId", $playlistId);
+
+    $stmt->execute();
+  }
+
+  function deletePlaylist($pdo, $playlistId, $userId){
+    $query = "DELETE FROM playlists WHERE users_id = :userId 
+      AND playlist_id = :playlistId;";
+
+    $stmt = $pdo->prepare($query);
+
+    $stmt->bindParam(":userId", $userId);
+    $stmt->bindParam(":playlistId", $playlistId);
+
+    $stmt->execute();
+  }

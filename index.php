@@ -40,7 +40,7 @@
     
     <div class="music-player">
       <div class="music-player-header">
-        <img src="images/svgs/down-arrow-icon.svg" alt="down-arrow-icon" class="music-player-downarrow-icon" width="30px">
+        <img src="images/svgs/down-arrow-icon.svg" alt="down-arrow-icon" class="dm-icon music-player-downarrow-icon" width="30px">
         <!-- <img src="images/svgs/elipsis-icon.svg" alt="elipsis-icon" class="music-player-elipsis-icon" width="30px"> -->
       </div>
 
@@ -54,57 +54,60 @@
 
       <div class="music-player-content">
         <div class="music-player-song-info">
-          <p class="music-player-song-name">Feel No Ways</p>
-          <p class="music-player-artist-name">Drake</p>
+          <p class="dm-text music-player-song-name"></p>
+          <p class="music-player-artist-name"></p>
         </div>
-        <div class="music-player-default-message">
+        <div class="dm-text music-player-default-message">
           Not Playing
         </div>
-        <img src="images/svgs/heart-icon.svg" alt="heart-icon" class="music-player-heart-icon">
+        <div class="heart-icon-cont">
+          <img src="images/svgs/heart-icon.svg" alt="heart-icon" class="dm-icon music-player-heart-icon">
+          <img src="images/svgs/red-heart-icon.svg" alt="heart-icon" class="music-player-red-heart-icon" width="30px">
+        </div>
       </div>
 
       <div class="music-player-controls">
         <input type="range" class="song-slider">
         <div class="music-player-btns">
-          <img src="images/svgs/skip-icon.svg" alt="back-icon" class="music-player-back-icon" width="50px">
+          <img src="images/svgs/skip-icon.svg" alt="back-icon" class="dm-icon music-player-back-icon" width="50px">
           <div class="pause-start-cont">
-            <img src="images/svgs/pause-icon.svg" alt="pause-icon" class="music-player-pause-icon" width="65px">
-            <img src="images/svgs/start-icon.svg" alt="start-icon" class="music-player-play-icon" width="60px">
+            <img src="images/svgs/pause-icon.svg" alt="pause-icon" class="dm-icon music-player-pause-icon" width="65px">
+            <img src="images/svgs/start-icon.svg" alt="start-icon" class="dm-icon music-player-play-icon" width="60px">
           </div>
-          <img src="images/svgs/skip-icon.svg" alt="skip-icon" class="music-player-skip-icon" width="50px">
+          <img src="images/svgs/skip-icon.svg" alt="skip-icon" class="dm-icon music-player-skip-icon" width="50px">
         </div>
       </div>
 
       <audio src="" class="music-player-song"></audio>
   
       <div class="volume-cont">
-        <img src="images/svgs/volume-off-icon.svg" alt="" width="25px" class="song-volume-icon">
+        <img src="images/svgs/volume-off-icon.svg" alt="" width="25px" class="dm-icon song-volume-icon">
         <input type="range" class="song-volume" min="0" max="1" step=".01">
-        <img src="images/svgs/volume-on-icon.svg" alt="" width ="25px" class="song-volume-icon">
+        <img src="images/svgs/volume-on-icon.svg" alt="" width ="25px" class="dm-icon song-volume-icon">
       </div>
 
     </div>
 
-    <div class="add-song-to-playlist-page">
+    <div class="section-cont add-song-to-playlist-page">
       <div class="add-song-to-playlist-page-header">
-        <img src="images/svgs/back-arrow-icon.svg" alt="down-arrow-icon" class="add-song-playlist-page-back-arrow" width="30px">
+        <img src="images/svgs/back-arrow-icon.svg" alt="down-arrow-icon" class="dm-icon add-song-playlist-page-back-arrow" width="30px">
       </div>
-      <div class="add-song-to-playlist-page-message">
+      <div class="dm-text add-song-to-playlist-page-message">
         Choose a playlist:
       </div>
       <div class="add-playlists-cont">
         <?php displaySelectionPlaylists($playlistsInfo) ?>
       </div>
 
-      <div class="add-playlist-success-fail-message"></div>
+      <div class="dm-text add-playlist-success-fail-message"></div>
 
       <div class="add-song-playlist-submit-btn-cont">
-        <button class="add-song-playlist-submit-btn">Add to playlist</button>
+        <button class="dm-text add-song-playlist-submit-btn">Add to playlist</button>
       </div>
 
     </div>
 
-    <div class="add-song-library-success-fail-message">hey</div>
+    <div class="dm-text add-song-library-success-fail-message"></div>
 
     <?php
       include_once "components/mini-player.php";

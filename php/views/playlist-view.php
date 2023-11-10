@@ -15,9 +15,9 @@
               <img src="images/svgs/playlists-icon.svg" alt="playlist-img"class="playlist-img">
             </div>
   
-            <p class="playlist-name"><?php echo $playlist["playlist_name"];?> </p>
+            <p class="dm-text playlist-name"><?php echo $playlist["playlist_name"];?> </p>
   
-            <img src="images/svgs/right-arrow-icon.svg" alt="right-arrow">
+            <img src="images/svgs/right-arrow-icon.svg" alt="right-arrow" class="dm-icon">
   
             <div class="playlist-id"><?php echo $playlist["playlist_id"];?> </div>
           </div>
@@ -26,7 +26,7 @@
     }
     else{
       ?>
-        <div class="no-playlists-message">No playlists</div>
+        <div class="dm-text no-playlists-message">No playlists</div>
       <?php
     }
   }
@@ -45,11 +45,11 @@
     foreach($playlistSongs as $playlistSong){
       ?>
         <div class="song-cont playlist-song-cont">
-            <img src="song-content/<?php echo $playlistSong["song_image_path"];?>" alt="song-img" class="song-img playlist-song-img">
+            <img src="data:image/jpeg;base64,<?php echo base64_encode($playlistSong["song_image"]);?>" alt="song-img" class="song-img playlist-song-img">
             <div class="song-play-btn playlist-song-btn">
             </div>
             <div class="playlist-song-content">
-              <p class="playlist-song-name"><?php echo $playlistSong["song_name"];?> </p>
+              <p class="dm-text playlist-song-name"><?php echo $playlistSong["song_name"];?> </p>
               <p class="playlist-song-artist"><?php echo $playlistSong["artist_name"];?></p>
             </div>
 
@@ -57,28 +57,34 @@
 
           <div class="song-popup playlist-song-popup">
             <div class="close-btn popup-btn">
-              <img src="images/svgs/x-icon.svg" alt="" width="20px">
-              <p>Close</p>
+              <img class="dm-icon" src="images/svgs/x-icon.svg" alt="" width="20px">
+              <p class="dm-text">Close</p>
             </div>
 
-            <div class="delete-cont popup-btn">
-              <div class="song-id"><?php echo $playlistSong["song_id"] ?></div>
-              <img src="images/svgs/trash-icon.svg" alt="" width="20px">
-              <p>Delete from playlist</p>
+            <div class="delete-cont popup-btn delete-playlist-song-btn">
+              <div class="song-id"><?php echo $playlistSong["song_id"]; ?></div>
+              <div class="delete-playlist-song-id"><?php echo $playlistSong["playlist_id"]; ?></div>
+              <img class="dm-icon" src="images/svgs/trash-icon.svg" alt="" width="20px">
+              <p class="dm-text">Delete from playlist</p>
             </div>
 
             <div class="add-cont popup-btn add-playlist-btn">
+              <div class="song-id"><?php echo $playlistSong["song_id"]; ?></div>
+              <img class="dm-icon" src="images/svgs/plus-icon.svg" alt="" width="20px">
+              <p class="dm-text">Add to playlist
+            </div>
+
+            <div class="favorite-cont popup-btn add-favorites-btn playlist-favorite-btn">
               <div class="song-id"><?php echo $playlistSong["song_id"] ?></div>
-              <img src="images/svgs/plus-icon.svg" alt="" width="20px">
-              <p>Add to playlist
+              <img class="dm-icon" src="images/svgs/heart-icon.svg" alt="" width="19px">
+              <p class="dm-text">Favorite</p>
             </div>
           </div>
 
           <div class="song-playlist-id"><?php echo $playlistSong["playlist_id"];?> </div>
 
-          <div class="song-audio-src">
-            <?php echo $playlistSong["song_audio_path"];?>
-          </div>
+          <audio src="data:audio/mpeg;base64,<?php echo base64_encode($playlistSong["song_audio_file"]);?>" class="song-audio-src">
+          </audio>
         </div>
       <?php
     }
@@ -97,7 +103,7 @@
             <div class="playlist-img-cont">
               <img src="images/svgs/playlists-icon.svg" alt="playlist-img"class="playlist-img">
             </div>
-            <p class="playlist-name"><?php echo $playlist["playlist_name"];?> </p>
+            <p class="dm-text playlist-name"><?php echo $playlist["playlist_name"];?> </p>
 
           </label>
         </div>

@@ -407,11 +407,22 @@ body{
 .music-player-song-name{
   font-size: 17px;
 }
+.heart-icon-cont{
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .music-player-artist-name{
   color: var(--reg-grey);
 }
 .music-player-heart-icon{
   cursor: pointer;
+}
+.music-player-red-heart-icon{
+  filter: invert(12%) sepia(99%) saturate(7477%) hue-rotate(3deg) brightness(93%) contrast(121%);
+  display: none;
 }
 .music-player-controls{
   width: 100%;
@@ -428,17 +439,17 @@ body{
   -webkit-appearance: none;
   width: 100%;
   height: 4px;
-  background-color: black;
+  background-color: var(--reg-grey);
   border-radius: 1rem;
   cursor: pointer;
 }
 .song-slider::-webkit-slider-thumb{
   -webkit-appearance: none;
-  background-color: black;
+  background-color: var(--reg-grey);
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 5px solid black;
+  border: 5px solid var(--reg-grey);
 }
 .music-player-btns{
   display: flex;
@@ -475,17 +486,17 @@ body{
   -webkit-appearance: none;
   width: 60%;
   height: 4px;
-  background-color: black;
+  background-color: var(--reg-grey);
   border-radius: 1rem;
   cursor: pointer;
 }
 .song-volume::-webkit-slider-thumb{
   -webkit-appearance: none;
-  background-color: black;
+  background-color: var(--reg-grey);
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 5px solid black;
+  border: 5px solid var(--reg-grey);
 }
 
 .library-no-results-message{
@@ -536,6 +547,7 @@ body{
   display: flex;
   border-bottom: 1px solid grey;
 }
+
 .add-playlist-original-btn{
   display: none;
 }
@@ -556,6 +568,7 @@ body{
   padding-bottom: 5px;
   align-items: center;
   gap: 10px;
+  cursor: pointer;
 }
 
 .add-song-playlist-submit-btn{
@@ -599,4 +612,19 @@ body{
   font-size: 10px;
   font-weight: bold;
   display: none;
+}
+
+.song-id{
+  display: none;
+}
+.delete-playlist-song-id{
+  display: none;
+}
+
+.song-popup .add-favorites-btn{
+  border-bottom: none;
+}
+
+.song-popup .unfavorite-btn{
+  border-bottom: none;
 }

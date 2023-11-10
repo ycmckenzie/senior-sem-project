@@ -16,4 +16,10 @@ if(isset($_POST["addLibrarySongId"])){
   else{
     echo "Song already in library";
   }
+
+  $pdo = null;
+  $stmt = null;
+  die();
+
+  unset($_POST["addLibrarySongId"]);
 }

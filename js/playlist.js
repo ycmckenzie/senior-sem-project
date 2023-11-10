@@ -50,6 +50,7 @@ playlistBtns.forEach(btn => {
   })
 })
 
+
 // hiding the playlist page on back arrow button click
 // displying the navbar, header, and miniplayer
 
@@ -95,6 +96,27 @@ function createPlaylist(e){
   }
 }
 
+let deletePlaylistSongBtns = document.querySelectorAll(".delete-playlist-song-btn");
+let deletePlaylistSongId; 
+let deletePlaylistId;
+
+deletePlaylistSongBtns.forEach(btn => {
+  btn.addEventListener("click", function(){
+    deletePlaylistSongId = btn.firstElementChild.innerText;
+    deletePlaylistId = btn.firstElementChild.nextElementSibling.innerText;
+
+    let deletePlaylistIds = [deletePlaylistSongId, deletePlaylistId];
+
+    let params = "deletePlaylistIds=" + deletePlaylistIds;
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'php/ajax/delete-playlist-song.php', true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    xhr.send(params);
+  })
+})
+
 let playlistName = document.querySelector(".playlist-page-name");
 
 playlistBtns.forEach(btn => {
@@ -105,9 +127,12 @@ playlistBtns.forEach(btn => {
 
 let playlistId;
 let playlistSongs = document.querySelectorAll(".playlist-song-cont");
+let emptyPlaylistMessage = document.querySelector(".empty-playlist-message")
+let numPlaylistSongs;
 
 playlistBtns.forEach(btn => {
   btn.addEventListener("click", function(){
+    numPlaylistSongs = 0;
     playlistId = btn.lastElementChild.innerText;
 
     playlistSongs.forEach(song => {
@@ -115,13 +140,49 @@ playlistBtns.forEach(btn => {
 
       if(playlistId == songPlaylistId){
         song.style.display = "flex";
+        numPlaylistSongs++;
       }
       else{
         song.style.display = "none";
       }
     })
 
+    if(numPlaylistSongs <= 0){
+      emptyPlaylistMessage.style.display = "block";
+    }
+    else{
+      emptyPlaylistMessage.style.display = "none";
+    }
+
   })
+})
+
+let deletePlaylistBtnId = document.querySelector(".delete-playlist-btn-id");
+
+playlistBtns.forEach(btn => {
+  btn.addEventListener("click", function(){
+    deletePlaylistBtnId.innerText = btn.lastElementChild.innerText;
+  })
+})
+
+let deletePlaylistBtn = document.querySelector(".delete-playlist-btn");
+
+deletePlaylistBtn.addEventListener("click", function(){
+  let deletePlaylistId = deletePlaylistBtnId.innerText;
+
+  let params = "deletePlaylistId=" + deletePlaylistId;
+
+  let xhr = new XMLHttpRequest();
+  xhr.open('POST', 'php/ajax/delete-playlist.php', true);
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+
+  xhr.send(params);
+
+  playlistPage.style.display = "none";
+  miniPlayer.style.display = "flex";
+  mainNav.style.display = "flex";
+  mainHeader.style.display = "flex";
 })
 
 let playlistSearchbar = document.querySelector("#playlist-searchbar");
@@ -174,5 +235,15 @@ playlistXBtn.addEventListener("click", function(){
   playlists.forEach(playlist => {
     playlist.style.display = "flex";
   })
+})
+
+
+//hiding/displaying playlist popup
+
+let playlistOptionBtn = document.querySelector(".playlist-option-btn");
+let playlistPagePopup = document.querySelector(".playlist-page-popup");
+
+playlistOptionBtn.addEventListener("click", function(){
+  playlistPagePopup.style.display = "block";
 })
 

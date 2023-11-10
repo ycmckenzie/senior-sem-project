@@ -1,6 +1,8 @@
 <?php
-  include_once "php/models/library-model.php";
-  include_once "php/controllers/library-contr.php";
+  include_once "../conn.php";
+  include_once "../session-config.php";
+  include_once "../models/library-model.php";
+  include_once "../controllers/library-contr.php";
 
   $userId = $_SESSION["userId"];
 
@@ -19,7 +21,7 @@
                 <p class="song-artist"><?php echo $song["artist_name"];?></p>
               </div>
   
-            <img src="images/svgs/elipsis-icon.svg" alt="" width="30px" class="elipsis-icon"> 
+            <img src="images/svgs/elipsis-icon.svg" alt="" width="30px" class="dm-icon elipsis-icon library-options-icon"> 
   
             <div class="song-popup">
               <div class="close-btn popup-btn">
@@ -59,7 +61,4 @@
     }
   }
 
-  
-
-
-  
+  displayLibrarySongs($songs);

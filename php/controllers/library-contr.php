@@ -11,3 +11,8 @@
   function addLibrarySong($pdo, $userId, $songId){
     insertLibrarySong($pdo, $userId, $songId);
   }
+
+  function removeLibrarySong($pdo, $userId, $songId){
+    deleteLibrarySong($pdo, $userId, $songId);
+  }
+

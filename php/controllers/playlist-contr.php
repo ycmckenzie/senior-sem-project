@@ -23,3 +23,10 @@
     insertPlaylistSong($pdo, $userId, $songId, $playlistId);
   }
 
+  function removePlaylistSong($pdo, $userId, $songId, $playlistId){
+    deletePlaylistSong($pdo, $userId, $songId, $playlistId);
+  }
+
+  function removePlaylist($pdo, $playlistId, $userId){
+    deletePlaylist($pdo, $playlistId, $userId);
+  }

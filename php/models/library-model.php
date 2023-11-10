@@ -43,3 +43,14 @@
 
     $stmt->execute();
   }
+
+  function deleteLibrarySong($pdo, $userId, $songId){
+    $query = "DELETE FROM libraries WHERE users_id = :userId 
+      AND song_id = :songId;";
+
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":userId", $userId);
+    $stmt->bindParam(":songId", $songId);
+
+    $stmt->execute();
+  }
