@@ -8,11 +8,11 @@ let genreSongsHeaderText = document.querySelector(".display-genre-songs-header-t
 genreBtns.forEach(btn => {
   btn.addEventListener("click", function(){
     displayGenreSongsPage.style.display = "flex";
-    miniPlayer.style.display = "none";
-    mainNav.style.display = "none";
+    //miniPlayer.style.display = "none";
+    //mainNav.style.display = "none";
     mainHeader.style.display = "none";
-    mainCont.style.height = "100vh";
-    mainCont.style.overflowY = "hidden";
+    //mainCont.style.height = "100vh";
+    //mainCont.style.overflowY = "hidden";
 
     genreSongsHeaderText.innerText = btn.lastElementChild.innerText + " Songs";
   })
@@ -25,11 +25,11 @@ let displayGenreSongsPageBackBtn = document.querySelector(".display-genre-songs-
 
 displayGenreSongsPageBackBtn.addEventListener("click", function(){
   displayGenreSongsPage.style.display = "none";
-  miniPlayer.style.display = "flex";
-  mainNav.style.display = "flex";
+  //miniPlayer.style.display = "flex";
+  //mainNav.style.display = "flex";
   mainHeader.style.display = "flex";
-  mainCont.style.height = "100%";
-  mainCont.style.overflowY = "visible";
+  //mainCont.style.height = "100%";
+  //mainCont.style.overflowY = "visible";
 })
 
 //specifiying which songs to display based on what genere button is clicked
@@ -66,12 +66,13 @@ let numResults;
 searchSearchbar.addEventListener("keyup", function(){
   searchSearchbarValue = (searchSearchbar.value).toLowerCase().trim();
   numResults = 0;
-
+  console.log(searchSearchbarValue)
   searchSongs.forEach(song => {
     let songName = (song.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText).toLowerCase();
-    let songArtist = (song.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText).toLowerCase()
-      
-    if(songName.includes(searchSearchbarValue) || songArtist.includes(searchSearchbarValue)){
+    let songArtist = (song.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.previousElementSibling.innerText).toLowerCase();
+    let songGenre = (song.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText).toLowerCase();
+
+    if(songName.includes(searchSearchbarValue) || songArtist.includes(searchSearchbarValue) || songGenre.includes(searchSearchbarValue)){
       song.style.display = "flex";
       numResults++;
     }

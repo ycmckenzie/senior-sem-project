@@ -16,3 +16,6 @@
     deleteLibrarySong($pdo, $userId, $songId);
   }
 
+  function isLibrarySongFavorited($pdo, $userId, $songId){
+    return checkLibrarySongFavorited($pdo, $userId, $songId);
+  }

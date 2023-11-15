@@ -27,6 +27,13 @@ miniPlayerOpen.addEventListener("click", function(){
   mainCont.style.overflowY = "hidden";
 })
 
+let libraryNavBtn = document.querySelector(".library-nav-btn");
+
+window.addEventListener("load", function(){
+  libraryNavBtn.classList.add("nav-btn-active");
+  console.log("load")
+})
+
 let navBtns = document.querySelectorAll(".nav-btn");
 
 navBtns.forEach(btn => {
@@ -37,10 +44,23 @@ navBtns.forEach(btn => {
     
     btn.classList.remove("nav-btn-unactive")
 
-    if(!btn.classList.contains("nav-btn-active")){
+    btn.classList.add("nav-btn-active")
 
+    /*
+    if(!btn.classList.contains("nav-btn-active")){
       btn.classList.toggle("nav-btn-active");
     }
+    */
+  })
+})
+let closeSections = document.querySelectorAll(".close-section")
+
+navBtns.forEach(btn => {
+  btn.addEventListener("click", function(){
+    mainHeader.style.display = "flex"
+    closeSections.forEach(section => {
+      section.style.display = "none"
+    })
   })
 })
 
@@ -195,6 +215,56 @@ libraryXBtn.addEventListener("click", function(){
   })
 })
 
+//desktopLibrarySearchFunctionality
+
+let desktopLibrarySearchbar = document.querySelector("#desktop-library-searchbar");
+let desktopLibraryXBtn = document.querySelector("#desktop-library-x-btn");
+let desktopLibrarySearchbarValue;
+let numDesktopLibraryResults;
+
+desktopLibrarySearchbar.addEventListener("keyup", function(){
+  desktopLibrarySearchbarValue = (desktopLibrarySearchbar.value).toLowerCase().trim();
+  numDesktopLibraryResults = 0;
+
+  librarySongs.forEach(song => {
+    let songName = (song.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText).toLowerCase();
+    let songArtist = (song.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.previousElementSibling.innerText).toLowerCase();
+    let songGenre = (song.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText).toLowerCase();
+
+    if(songName.includes(desktopLibrarySearchbarValue) || songArtist.includes(desktopLibrarySearchbarValue) || songGenre.includes(desktopLibrarySearchbarValue)){
+      song.style.display = "flex";
+      numDesktopLibraryResults++;
+    }
+    else{
+      song.style.display = "none";
+    }
+  })
+
+    if(desktopLibrarySearchbarValue.length <= 0){
+      desktopLibraryXBtn.style.display = "none";
+      libraryNoResultsMessage.style.display = "none";
+    }
+    else{
+      desktopLibraryXBtn.style.display = "block";
+    }
+
+  if(numDesktopLibraryResults == 0){
+    libraryNoResultsMessage.style.display = "block";
+  }
+  else{
+    libraryNoResultsMessage.style.display = "none";
+  }
+})
+
+desktopLibraryXBtn.addEventListener("click", function(){
+  desktopLibraryXBtn.style.display = "none";
+  desktopLibrarySearchbar.value = "";
+  libraryNoResultsMessage.style.display = "none"
+
+  librarySongs.forEach(song => {
+    song.style.display = "flex";
+  })
+})
 
 
 //playing the song when a song is clicked, changing the image source of the miniplayer and music player to the image of the song
@@ -219,11 +289,11 @@ librarySongPlayBtn.forEach(song => {
     let songSrc = song.previousElementSibling.src;
     miniPlayerImg.src = songSrc;
     miniPlayerSongName.innerText = song.nextElementSibling.firstElementChild.innerText;
-    miniPlayerArtistName.innerText = song.nextElementSibling.lastElementChild.innerText;
+    miniPlayerArtistName.innerText = song.nextElementSibling.firstElementChild.nextElementSibling.innerText;
 
     musicPlayerImg.src = songSrc;
     musicPlayerSongName.innerText = song.nextElementSibling.firstElementChild.innerText;
-    musicPlayerArtistName.innerText = song.nextElementSibling.lastElementChild.innerText;
+    musicPlayerArtistName.innerText = song.nextElementSibling.firstElementChild.nextElementSibling.innerText;
 
     let songAudioSrc = song.parentElement.lastElementChild.src;
     musicPlayerSong.src = songAudioSrc;
@@ -281,8 +351,8 @@ musicPlayerBackBtn.addEventListener("click", function(){
     musicPlayerImg.src = currentSong.firstElementChild.src;
     miniPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
     musicPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
-    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText
-    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText
+    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.previousElementSibling.innerText
+    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.previousElementSibling.innerText
 
     let newSongSrc = currentSong.lastElementChild.src;
     musicPlayerSong.src = newSongSrc;
@@ -306,8 +376,8 @@ musicPlayerSkipBtn.addEventListener("click", function(){
     musicPlayerImg.src = currentSong.firstElementChild.src;
     miniPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
     musicPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
-    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText
-    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText
+    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.previousElementSibling.innerText
+    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.previousElementSibling.innerText;
 
     let newSongSrc = currentSong.lastElementChild.src;
     musicPlayerSong.src = newSongSrc;
@@ -332,8 +402,8 @@ miniPlayerSkipBtn.addEventListener("click", function(){
     musicPlayerImg.src = currentSong.firstElementChild.src;
     miniPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
     musicPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
-    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText
-    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText
+    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.previousElementSibling.innerText
+    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.previousElementSibling.innerText
 
     let newSongSrc = currentSong.lastElementChild.src;
     musicPlayerSong.src = newSongSrc;
@@ -557,25 +627,6 @@ addToLibraryBtns.forEach(btn => {
   })
 })
 
-//refreshing library songs container after song is added
-/*
-addToLibraryBtns.forEach(btn => {
-  btn.addEventListener("click", function(){
-
-    let xhr = new XMLHttpRequest();
-
-    xhr.open('GET', 'php/ajax/refresh-library-songs.php?timestamp=' + Date.now(), true);
-
-    xhr.onload = function(){
-      librarySongsCont.innerHTML = this.responseText;
-      addLibraryBtnsEventListeners();
-    }
-
-    xhr.send();
-  })
-})
-*/
-
 // deleting from libraries table using ajax
 
 let deleteLibrarySongBtns = document.querySelectorAll(".delete-library-btn");
@@ -595,478 +646,6 @@ deleteLibrarySongBtns.forEach(btn => {
 
   })
 })
-
-//refreshing library songs container after song is deleted
-/*
-deleteLibrarySongBtns.forEach(btn => {
-  btn.addEventListener("click", function(){
-
-    let xhr = new XMLHttpRequest();
-
-    xhr.open('GET', 'php/ajax/refresh-library-songs.php?timestamp=' + Date.now(), true);
-
-    xhr.onload = function(){
-      librarySongsCont.innerHTML = this.responseText;
-      addLibraryBtnsEventListeners();
-    }
-
-    xhr.send();
-  })
-})
-*/
-
-//adding eventlisteners to back to library songs after refresh
-
-function addLibraryBtnsEventListeners(){
-
-  // music player functionality
-
-  let musicPlayerBackBtn = document.querySelector(".music-player-back-icon");
-
-  musicPlayerBackBtn.addEventListener("click", function(){
-    if (currentSong && currentSong.previousElementSibling != null && currentSong.previousElementSibling.style.display != "none"){
-      let previousSong = currentSong.previousElementSibling;
-      currentSong = previousSong
-
-      miniPlayerImg.src = currentSong.firstElementChild.src;
-      musicPlayerImg.src = currentSong.firstElementChild.src;
-      miniPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
-      musicPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
-      miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText
-      musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText
-
-      let newSongSrc = currentSong.lastElementChild.src;
-      musicPlayerSong.src = newSongSrc;
-      musicPlayerPause.style.display = "block";
-      musicPlayerPlay.style.display = "none";
-
-      miniPlayerPauseBtn.style.display = "block";
-      miniPlayerPlayBtn.style.display = "none";
-      musicPlayerSong.play();
-    }
-  })
-
-  let musicPlayerSkipBtn = document.querySelector(".music-player-skip-icon");
-
-  musicPlayerSkipBtn.addEventListener("click", function(){
-    if (currentSong && currentSong.nextElementSibling != null && currentSong.nextElementSibling.style.display != "none"){
-      let nextSong = currentSong.nextElementSibling;
-      currentSong = nextSong;
-
-      miniPlayerImg.src = currentSong.firstElementChild.src;
-      musicPlayerImg.src = currentSong.firstElementChild.src;
-      miniPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
-      musicPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
-      miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText
-      musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText
-
-      let newSongSrc = currentSong.lastElementChild.src;
-      musicPlayerSong.src = newSongSrc;
-      musicPlayerSong.play();
-
-      musicPlayerPause.style.display = "block";
-      musicPlayerPlay.style.display = "none";
-
-      miniPlayerPauseBtn.style.display = "block";
-      miniPlayerPlayBtn.style.display = "none";
-    }
-  })
-
-  let miniPlayerSkipBtn = document.querySelector(".mini-player-skip-btn");
-
-  miniPlayerSkipBtn.addEventListener("click", function(){
-    if (currentSong && currentSong.nextElementSibling != null && currentSong.nextElementSibling.style.display != "none"){
-      let nextSong = currentSong.nextElementSibling;
-      currentSong = nextSong
-
-      miniPlayerImg.src = currentSong.firstElementChild.src;
-      musicPlayerImg.src = currentSong.firstElementChild.src;
-      miniPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
-      musicPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
-      miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText
-      musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText
-
-      let newSongSrc = currentSong.lastElementChild.src;
-      musicPlayerSong.src = newSongSrc;
-      musicPlayerSong.play();
-
-      musicPlayerPause.style.display = "block";
-      musicPlayerPlay.style.display = "none";
-
-      miniPlayerPauseBtn.style.display = "block";
-      miniPlayerPlayBtn.style.display = "none";
-    }
-  })
-
-  //if there is a song selected, pause it on button click
-
-  musicPlayerPause.addEventListener("click", function(){
-    if(currentSong){
-      musicPlayerSong.pause();
-    }
-  })
-
-  //if there is a song selected, play it on button click
-
-  musicPlayerPlay.addEventListener("click", function(){
-    if(currentSong){
-      musicPlayerSong.play();
-    }
-  })
-
-  // after song has finished playing display the play button, hide the pause button
-
-  musicPlayerSong.addEventListener("ended", function(){
-    musicPlayerPause.style.display = "none";
-    musicPlayerPlay.style.display = "block";
-
-    miniPlayerPauseBtn.style.display = "none";
-    miniPlayerPlayBtn.style.display = "block";
-  })
-
-  let songProgressBar = document.querySelector(".song-slider");
-
-  musicPlayerSong.addEventListener("canplay", function(){
-    songProgressBar.max = musicPlayerSong.duration;
-    songProgressBar.value = musicPlayerSong.currentTime;
-    songProgressBar.step = .05;
-  })
-
-
-  musicPlayerSong.addEventListener('play', function(){
-    interval = setInterval(function() {
-      songProgressBar.value = musicPlayerSong.currentTime
-
-      if (musicPlayerSong.ended){
-        clearInterval(interval)
-      }
-
-    }, 500)
-  })
-
-  songProgressBar.addEventListener("input", function(){
-    musicPlayerSong.currentTime = songProgressBar.value;
-  })
-
-  let songVolume = document.querySelector(".song-volume");
-
-  songVolume.addEventListener("input", function(){
-    musicPlayerSong.volume = songVolume.value;
-  })
-
-  //mini-player functionality
-
-  let miniPlayerPlayBtn = document.querySelector(".mini-player-play-btn");
-  let miniPlayerPauseBtn = document.querySelector(".mini-player-pause-btn");
-
-  miniPlayerPlayBtn.addEventListener("click", ()=> {
-    miniPlayerPlayBtn.style.display = "none";
-    miniPlayerPauseBtn.style.display = "block";
-
-    musicPlayerPlay.style.display = "none";
-    musicPlayerPause.style.display = "block";
-
-    if(currentSong){
-      musicPlayerSong.play();
-    }
-  })
-
-  miniPlayerPauseBtn.addEventListener("click", ()=> {
-    miniPlayerPauseBtn.style.display = "none";
-    miniPlayerPlayBtn.style.display = "block";
-
-    musicPlayerPause.style.display = "none";
-    musicPlayerPlay.style.display = "block";
-
-    if(currentSong){
-      musicPlayerSong.pause();
-    }
-  })
-
-  //library searching functionality
-
-  //on librarySearchbar key up, for every song, if its song title, or artist name
-  //match what currently being searched, increment results counter by one, display
-  //the song, if not hide the song. If there are no results, display no results message 
-
-  let librarySearchbar = document.querySelector("#library-searchbar");
-  let libraryXBtn = document.querySelector("#library-x-btn");
-  let librarySongs = document.querySelectorAll(".library-song-cont");
-  let librarySearchbarValue;
-  let libraryNoResultsMessage = document.querySelector(".library-no-results-message")
-  let numLibraryResults;
-
-  librarySearchbar.addEventListener("keyup", function(){
-    librarySearchbarValue = (librarySearchbar.value).toLowerCase().trim();
-    numLibraryResults = 0;
-
-    librarySongs.forEach(song => {
-      let songName = (song.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText).toLowerCase();
-      let songArtist = (song.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText).toLowerCase();
-
-      if(songName.includes(librarySearchbarValue) || songArtist.includes(librarySearchbarValue)){
-        song.style.display = "flex";
-        numLibraryResults++;
-      }
-      else{
-        song.style.display = "none";
-      }
-    })
-
-    if(librarySearchbarValue.length <= 0){
-      libraryXBtn.style.display = "none";
-      libraryNoResultsMessage.style.display = "none";
-    }
-    else{
-      libraryXBtn.style.display = "block";
-    }
-
-    if(numLibraryResults == 0){
-      libraryNoResultsMessage.style.display = "block";
-    }
-    else{
-      libraryNoResultsMessage.style.display = "none";
-    }
-  })
-
-  //when the librarySearchBar x-btn is clicked, display every song, clear the 
-  //search field, and hide the no results message
-
-  libraryXBtn.addEventListener("click", function(){
-    libraryXBtn.style.display = "none";
-    librarySearchbar.value = "";
-    libraryNoResultsMessage.style.display = "none"
-
-    librarySongs.forEach(song => {
-      song.style.display = "flex";
-    })
-  })
-
-  //for each LibrarySong, display its popup when its options icon is clicked
-
-  let songPopups = document.querySelectorAll(".song-popup");
-  let optionsIcons = document.querySelectorAll(".elipsis-icon");
-
-  optionsIcons.forEach(icon => {
-    icon.addEventListener("click", function(){
-      songPopups.forEach(popup =>{
-        popup.style.display = "none"
-      })
-      icon.nextElementSibling.style.display = "flex";
-    })
-  })
-
-  //Closing the librarySongs popups when close button is clicked
-
-  let popupCloseBtns = document.querySelectorAll(".close-btn");
-
-  popupCloseBtns.forEach(btn => {
-    btn.addEventListener("click", function(){
-      btn.parentElement.style.display = "none";
-    })
-  })
-
-  //when a librarySong is clicked, set the currentSong variable equal to that element
-  //set the miniplayer and music player image equal to that songs image
-  //set the miniplayer and music players song name and artist equal to the song's
-  //set the music players song src equal to the songs src, and play the music players song
-
-  let librarySongPlayBtn = document.querySelectorAll(".song-play-btn");
-  let miniPlayerImg = document.querySelector(".mini-player-img");
-  let miniPlayerSongName = document.querySelector(".mini-player-song-name");
-  let miniPlayerArtistName = document.querySelector(".mini-player-artist-name");
-  let musicPlayerImg = document.querySelector(".music-player-img");
-  let musicPlayerSongName = document.querySelector(".music-player-song-name");
-  let musicPlayerArtistName = document.querySelector(".music-player-artist-name")
-  let musicPlayerSong = document.querySelector(".music-player-song");
-
-  let currentSong;
-
-  librarySongPlayBtn.forEach(song => {
-    song.addEventListener("click", function(){
-      let songSrc = song.previousElementSibling.src;
-      miniPlayerImg.src = songSrc;
-      miniPlayerSongName.innerText = song.nextElementSibling.firstElementChild.innerText;
-      miniPlayerArtistName.innerText = song.nextElementSibling.lastElementChild.innerText;
-
-      musicPlayerImg.src = songSrc;
-      musicPlayerSongName.innerText = song.nextElementSibling.firstElementChild.innerText;
-      musicPlayerArtistName.innerText = song.nextElementSibling.lastElementChild.innerText;
-
-      let songAudioSrc = song.parentElement.lastElementChild.src;
-      musicPlayerSong.src = songAudioSrc;
-      musicPlayerSong.play();
-
-      currentSong = song.parentElement;
-
-      musicPlayerPause.style.display = "block";
-      musicPlayerPlay.style.display = "none";
-
-      miniPlayerPauseBtn.style.display = "block";
-      miniPlayerPlayBtn.style.display = "none";
-    })
-  })
-
-  //hiding the default mini player and music player content when librarySong is clicked
-
-  let miniPlayerDefaultImg = document.querySelector(".mini-player-default-img-cont");
-  let miniPlayerDefaultMessage = document.querySelector(".mini-player-default-message");
-  let miniPlayerContent = document.querySelector(".mini-player-content");
-  let musicPlayerDefaultImg = document.querySelector(".music-player-default-img-cont");
-  let musicPlayerImgCont = document.querySelector(".music-player-img-cont");
-  let musicPlayerSongInfo = document.querySelector(".music-player-song-info");
-  let musicPlayerDefaultMessage = document.querySelector(".music-player-default-message");
-
-  librarySongPlayBtn.forEach(song => {
-    song.addEventListener("click", function(){
-      miniPlayerDefaultImg.style.display = "none";
-      miniPlayerDefaultMessage.style.display = "none";
-      miniPlayerImg.style.display = "block";
-      miniPlayerContent.style.display = "flex";
-
-      musicPlayerDefaultImg.style.display = "none";
-      musicPlayerDefaultMessage.style.display = "none";
-      musicPlayerImgCont.style.display = "block";
-      musicPlayerSongInfo.style.display = "block";
-    })
-  })
-  
-  //when a add to playlist button is clicked, display the add to playlist page, and hide the
-  //main components
-
-  let addToPlaylistBtns = document.querySelectorAll(".add-playlist-btn");
-  let addToPlaylistPage = document.querySelector(".add-song-to-playlist-page");
-
-  addToPlaylistBtns.forEach(btn => {
-    btn.addEventListener("click", function(){
-      addToPlaylistPage.style.display = "flex";
-      miniPlayer.style.display = "none";
-      mainNav.style.display = "none";
-      mainHeader.style.display = "none";
-    })
-  })
-
-  //closing the add to playlists page
-
-  let addToPlaylistPageBackBtn = document.querySelector(".add-song-playlist-page-back-arrow");
-
-  addToPlaylistPageBackBtn.addEventListener("click", function(){
-    addToPlaylistPage.style.display = "none";
-    miniPlayer.style.display = "flex";
-    mainNav.style.display = "flex";
-    mainHeader.style.display = "flex";
-    addToPlaylistSuccessFailMessage.style.display = "none";
-
-    songPopups.forEach(popup => {
-      popup.style.display = "none"
-    })
-
-    playlistSelections.forEach(selection => {
-      selection.checked = false;
-    })
-
-  })
-
-  //when an addToPlaylist button is clicked, set the addToPlaylistVarible
-  //equal to the songs id
-
-  let addToPlaylistSongId;
-
-  addToPlaylistBtns.forEach(btn => {
-    btn.addEventListener("click", function(){
-      addToPlaylistSongId = btn.firstElementChild.innerText;
-    })
-  })
-
-
-  //ajax request to insert song into playlists table
-
-  let addToPlaylistPageSubmitBtn = document.querySelector(".add-song-playlist-submit-btn")
-  let addToPlaylistSuccessFailMessage = document.querySelector(".add-playlist-success-fail-message")
-
-  let playlistSelections = document.querySelectorAll(".add-playlist-original-btn")
-  let playlistAddId;
-
-  addToPlaylistPageSubmitBtn.addEventListener("click", function(){
-    playlistSelections.forEach(selection => {
-      if (selection.checked){
-        playlistAddId = selection.value
-      }
-    })
-
-    if(playlistAddId && addToPlaylistSongId){
-      
-      let ids = [playlistAddId, addToPlaylistSongId]
-
-      let params = "ids=" + ids;
-
-      let xhr = new XMLHttpRequest();
-      xhr.open('POST', 'php/ajax/add-song-playlist.php', true);
-      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-      xhr.onload = function(){
-        addToPlaylistSuccessFailMessage.style.display = "block";
-        addToPlaylistSuccessFailMessage.innerText = this.responseText;
-      }
-
-      xhr.send(params);
-    }
-    
-  })
-
-  //making ajax request to insert song into libraries table
-
-  let addToLibraryBtns = document.querySelectorAll(".add-library-btn");
-  let addLibrarySuccessFailMessage = document.querySelector(".add-song-library-success-fail-message")
-  let addToLibrarySongId;
-
-  addToLibraryBtns.forEach(btn => {
-    btn.addEventListener("click", function(){
-      addToLibrarySongId = btn.firstElementChild.innerText;
-      
-      let params = "addLibrarySongId= " + addToLibrarySongId;
-
-      let xhr = new XMLHttpRequest();
-      xhr.open('POST', 'php/ajax/add-song-library.php', true);
-      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-      xhr.onload = function(){
-        addLibrarySuccessFailMessage.style.display = "block";
-        addLibrarySuccessFailMessage.innerText = this.responseText;
-      }
-
-      setTimeout(hideMessage, 3000);
-        
-      function hideMessage(){
-        addLibrarySuccessFailMessage.style.display = "none"
-      }
-
-
-      xhr.send(params);
-    })
-  })
-
-  //refreshing library songs container after song is added
-
-  addToLibraryBtns.forEach(btn => {
-    btn.addEventListener("click", function(){
-
-      let xhr = new XMLHttpRequest();
-
-      xhr.open('GET', 'php/ajax/refresh-library-songs.php?timestamp=' + Date.now(), true);
-
-      xhr.onload = function(){
-        librarySongsCont.innerHTML = this.responseText;
-        addLibraryBtnsEventListeners();
-      }
-
-      xhr.send();
-    })
-  })
-
-
-}
-
 
 //library loop and shuffle functionality
 
@@ -1091,8 +670,8 @@ function playSong(){
     musicPlayerImg.src = currentSong.firstElementChild.src;
     miniPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
     musicPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
-    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText
-    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText
+    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.previousElementSibling.innerText
+    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.previousElementSibling.innerText
 
     musicPlayerSong.src = musicPlayerSongSrc
     musicPlayerSong.play();
@@ -1104,8 +683,8 @@ function playSong(){
     musicPlayerImg.src = currentSong.firstElementChild.src;
     miniPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
     musicPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
-    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText
-    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText
+    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.previousElementSibling.innerText
+    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.previousElementSibling.innerText
 
     let musicPlayerSongSrc = currentSong.lastElementChild.src;
     musicPlayerSong.src = musicPlayerSongSrc;
@@ -1169,8 +748,8 @@ function playShuffledSongs(){
     musicPlayerImg.src = currentSong.firstElementChild.src;
     miniPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
     musicPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
-    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText
-    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText
+    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.previousElementSibling.innerText
+    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.previousElementSibling.innerText
 
     musicPlayerSong.src = musicPlayerSongSrc
     musicPlayerSong.play();
@@ -1183,8 +762,8 @@ function playShuffledSongs(){
     musicPlayerImg.src = currentSong.firstElementChild.src;
     miniPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
     musicPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
-    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText
-    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText
+    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.previousElementSibling.innerText
+    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.previousElementSibling.innerText
 
     let musicPlayerSongSrc = currentSong.lastElementChild.src;
     musicPlayerSong.src = musicPlayerSongSrc;

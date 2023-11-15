@@ -16,6 +16,7 @@
             <div class="song-content search-song-content">
               <p class="song-name search-song-name"><?php echo $song["song_name"];?> </p>
               <p class="song-artist search-song-artist"><?php echo $song["artist_name"];?></p>
+              <p class="dm-text song-genre search-song-genre"><?php echo $song["genre"];?></p>
             </div>
 
           <img src="images/svgs/elipsis-icon.svg" alt="" width="30px" class="elipsis-icon"> 
@@ -64,6 +65,7 @@
             <div class="song-content genre-song-content">
               <p class="song-name genre-song-name"><?php echo $song["song_name"];?> </p>
               <p class="song-artist genre-song-artist"><?php echo $song["artist_name"];?></p>
+              <p class="dm-text song-genre genre-song-genre"><?php echo $song["genre"];?></p>
             </div>
 
           <img src="images/svgs/elipsis-icon.svg" alt="" width="30px" class="elipsis-icon"> 

@@ -1,4 +1,7 @@
 <?php
+  error_reporting(E_ALL);
+  ini_set('display_errors', 1);
+  
   include_once "php/models/library-model.php";
   include_once "php/controllers/library-contr.php";
 
@@ -6,7 +9,7 @@
 
   $songs = requestLibrarySongs($pdo, $userId);
 
-  function displayLibrarySongs($songs){
+  function displayLibrarySongs($songs, $pdo, $userId){
     if($songs){
       foreach($songs as $song){
         ?>
@@ -17,6 +20,16 @@
               <div class="song-content">
                 <p class="song-name"><?php echo $song["song_name"];?> </p>
                 <p class="song-artist"><?php echo $song["artist_name"];?></p>
+                <p class="dm-text song-genre"><?php echo $song["genre"];?></p>
+                <p class="dm-text song-plays"><?php echo $song["num_plays"];?></p>
+
+                <?php
+                  if(isLibrarySongFavorited($pdo, $userId, $song["song_id"])){
+                    ?>
+                      <img src="images/svgs/red-heart-icon.svg" alt="heart-icon" class="library-song-heart song-heart" width="25px">
+                    <?php
+                  }
+                ?>
               </div>
   
             <img src="images/svgs/elipsis-icon.svg" alt="" width="30px" class="elipsis-icon"> 
@@ -28,7 +41,7 @@
               </div>
   
               <div class="delete-cont popup-btn delete-library-btn">
-                <div class="song-id"><?php echo $song["song_id"]; ?></div>
+                <div class="song-id"><?php echo $song["song_id"];?></div>
                 <img class="dm-icon" src="images/svgs/trash-icon.svg" alt="" width="20px">
                 <p class="dm-text">Delete from library</p>
               </div>
@@ -45,7 +58,21 @@
                 <p class="dm-text">Favorite</p>
               </div>
             </div>
-  
+
+            <div class="song-info">
+              <p class="dm-text song-info-id"><?php echo $song["song_id"];?></p>
+              <p class="dm-text song-favorited">
+                <?php
+                  if(isLibrarySongFavorited($pdo, $userId, $song["song_id"])){
+                    echo "true";
+                  }
+                  else{
+                    echo "false";
+                  }
+                ?>
+              </p>
+            </div>
+             
             <audio src="data:audio/mpeg;base64,<?php echo base64_encode($song["song_audio_file"]);?>" class="song-audio-src">
             </audio>
           </div>

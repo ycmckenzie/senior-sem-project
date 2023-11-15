@@ -23,3 +23,16 @@
 
     return $result;
   }
+
+  function getOurPicks($pdo){
+    $query = "SELECT * FROM songs WHERE song_id = 5 
+      OR song_id = 3 OR song_id = 9;";
+
+    $stmt = $pdo->prepare($query);
+
+    $stmt->execute();
+
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $result;
+  }

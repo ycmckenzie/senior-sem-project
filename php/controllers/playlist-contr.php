@@ -30,3 +30,7 @@
   function removePlaylist($pdo, $playlistId, $userId){
     deletePlaylist($pdo, $playlistId, $userId);
   }
+
+  function isPlaylistSongFavorited($pdo, $userId, $songId){
+    return checkPlaylistSongFavorited($pdo, $userId, $songId);
+  }

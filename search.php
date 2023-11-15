@@ -37,7 +37,7 @@
 
   <div class="dm-text search-no-results-message">No Results</div>
 
-  <div class="section-cont display-genre-songs-page">
+  <div class="section-cont display-genre-songs-page close-section">
     <div class="display-genre-songs-header">
       <img src="images/svgs/back-arrow-icon.svg" alt="back-arrow" class="dm-icon display-genre-songs-back-btn" width="30px">
       <p class="dm-text display-genre-songs-header-text"></p>

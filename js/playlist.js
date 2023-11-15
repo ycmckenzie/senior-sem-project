@@ -44,8 +44,8 @@ let playlistPage = document.querySelector(".playlist-page");
 playlistBtns.forEach(btn => {
   btn.addEventListener("click", function(){
     playlistPage.style.display = "flex";
-    miniPlayer.style.display = "none";
-    mainNav.style.display = "none";
+    //miniPlayer.style.display = "none";
+    //mainNav.style.display = "none";
     mainHeader.style.display = "none";
   })
 })
@@ -58,8 +58,8 @@ let playlistPageBackIcon = document.querySelector(".playlist-back-arrow-btn");
 
 playlistPageBackIcon.addEventListener("click", function(){
     playlistPage.style.display = "none";
-    miniPlayer.style.display = "flex";
-    mainNav.style.display = "flex";
+    //miniPlayer.style.display = "flex";
+    //mainNav.style.display = "flex";
     mainHeader.style.display = "flex";
 })
 
@@ -136,7 +136,7 @@ playlistBtns.forEach(btn => {
     playlistId = btn.lastElementChild.innerText;
 
     playlistSongs.forEach(song => {
-      let songPlaylistId = song.lastElementChild.previousElementSibling.innerText;
+      let songPlaylistId = song.lastElementChild.previousElementSibling.previousElementSibling.innerText;
 
       if(playlistId == songPlaylistId){
         song.style.display = "flex";
@@ -226,10 +226,59 @@ playlistSearchbar.addEventListener("keyup", function(){
 })
 
 
-
 playlistXBtn.addEventListener("click", function(){
   playlistXBtn.style.display = "none";
   playlistSearchbar.value = "";
+  playlistNoResultsMessage.style.display = "none"
+
+  playlists.forEach(playlist => {
+    playlist.style.display = "flex";
+  })
+})
+
+//desktop playlist search functionality
+
+let desktopPlaylistSearchbar = document.querySelector("#desktop-playlist-searchbar");
+let desktopPlaylistXBtn = document.querySelector("#desktop-playlist-x-btn");
+let desktopPlaylistSearchbarValue;
+let numDesktopPlaylistResults;
+
+desktopPlaylistSearchbar.addEventListener("keyup", function(){
+  desktopPlaylistSearchbarValue = (desktopPlaylistSearchbar.value).toLowerCase().trim();
+  numDesktopPlaylistResults = 0;
+
+  playlists.forEach(playlist => {
+    let playlistName = (playlist.firstElementChild.nextElementSibling.innerText).toLowerCase();
+      
+    if(playlistName.includes(desktopPlaylistSearchbarValue)){
+      playlist.style.display = "flex";
+      numDesktopPlaylistResults++;
+    }
+    else{
+      playlist.style.display = "none";
+    }
+  })
+
+    if(desktopPlaylistSearchbarValue.length <= 0){
+      desktopPlaylistXBtn.style.display = "none";
+      playlistNoResultsMessage.style.display = "none";
+    }
+    else{
+      desktopPlaylistXBtn.style.display = "block";
+    }
+
+  if(numDesktopPlaylistResults == 0){
+    playlistNoResultsMessage.style.display = "block";
+  }
+  else{
+    playlistNoResultsMessage.style.display = "none";
+  }
+
+})
+
+desktopPlaylistXBtn.addEventListener("click", function(){
+  desktopPlaylistXBtn.style.display = "none";
+  desktopPlaylistSearchbar.value = "";
   playlistNoResultsMessage.style.display = "none"
 
   playlists.forEach(playlist => {
@@ -247,3 +296,97 @@ playlistOptionBtn.addEventListener("click", function(){
   playlistPagePopup.style.display = "block";
 })
 
+let playlistPlayIcon = document.querySelector("#playlist-play-icon");
+let playlistSongsCont = document.querySelector(".playlist-songs-cont");
+let currentPlaylistSongs = [];
+
+playlistPlayIcon.addEventListener("click", startPlaylistMusicLoop);
+
+function startPlaylistMusicLoop() {
+  if(playlistSongsCont.firstElementChild.classList.contains("playlist-song-cont")){
+    currentSong = false;
+    musicPlayerSong.pause();
+
+    let allPlaylistSongs = document.querySelectorAll(".playlist-song-cont")
+    
+    for(let i = 0; i < allPlaylistSongs.length; i++){
+      if(allPlaylistSongs[i].style.display == "flex"){
+        currentPlaylistSongs.push(allPlaylistSongs[i])
+      }
+    }
+
+    playPlaylistSong(currentPlaylistSongs, 0);
+
+    currentPlaylistSongs = [];
+  }
+  console.log("hey")
+}
+
+function playPlaylistSong(currentPlaylistSongs, currIndex){
+  if(currentSong){
+    let musicPlayerSongSrc = currentSong.lastElementChild.src;
+    miniPlayerImg.src = currentSong.firstElementChild.src;
+    musicPlayerImg.src = currentSong.firstElementChild.src;
+    miniPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
+    musicPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
+    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText
+    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText
+
+    musicPlayerSong.src = musicPlayerSongSrc
+    musicPlayerSong.play();
+    musicPlayerSong.addEventListener("ended", function(){
+      nextPlaylistSong(currentPlaylistSongs, currIndex)
+    })
+  }
+  else{
+    currentSong = currentPlaylistSongs[0];
+    miniPlayerImg.src = currentSong.firstElementChild.src;
+    musicPlayerImg.src = currentSong.firstElementChild.src;
+    miniPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
+    musicPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
+    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText
+    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText
+
+    let musicPlayerSongSrc = currentSong.lastElementChild.src;
+    musicPlayerSong.src = musicPlayerSongSrc;
+    musicPlayerSong.play();
+    
+    musicPlayerSong.addEventListener("ended", function(){
+      nextPlaylistSong(currentPlaylistSongs, currIndex)
+    })
+
+    musicPlayerPause.style.display = "block";
+    musicPlayerPlay.style.display = "none";
+
+    miniPlayerPauseBtn.style.display = "block";
+    miniPlayerPlayBtn.style.display = "none";
+  }
+}
+
+function nextPlaylistSong(currentPlaylistSongs, currIndex){
+  if(currentSong.classList.contains("playlist-song-cont")){
+    let newIndex = currIndex + 1;
+    currentSong = currentPlaylistSongs[newIndex];
+    playPlaylistSong(currentPlaylistSongs, newIndex);
+
+    musicPlayerPause.style.display = "block";
+    musicPlayerPlay.style.display = "none";
+
+    miniPlayerPauseBtn.style.display = "block";
+    miniPlayerPlayBtn.style.display = "none";
+  }
+}
+
+playlistPlayIcon.addEventListener("click", function(){
+  if(currentSong){
+    miniPlayerDefaultImg.style.display = "none";
+    miniPlayerDefaultMessage.style.display = "none";
+    miniPlayerImg.style.display = "block";
+    miniPlayerContent.style.display = "flex";
+
+    musicPlayerDefaultImg.style.display = "none";
+    musicPlayerDefaultMessage.style.display = "none";
+    musicPlayerImgCont.style.display = "block";
+    musicPlayerSongInfo.style.display = "block";
+  }
+})

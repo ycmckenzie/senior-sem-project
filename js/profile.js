@@ -93,6 +93,19 @@ removeFavoritesBtns.forEach(btn => {
   })
 })
 
+let desktopProfileIcon = document.querySelector(".desktop-profile-icon");
+let desktopProfileModal = document.querySelector(".desktop-profile-modal");
+
+desktopProfileIcon.addEventListener("click", function(){
+  desktopProfileModal.style.display = "flex";
+  console.log("clicked")
+})
+
+let desktopProfileBackBtn = document.querySelector(".desktop-profile-back-arrow-icon")
+
+desktopProfileBackBtn.addEventListener("click", function(){
+  desktopProfileModal.style.display = "none";
+})
 
 
 
@@ -107,8 +120,7 @@ removeFavoritesBtns.forEach(btn => {
 
 
 
-
-let darkModeToggle = document.querySelector(".dark-mode-toggle");
+let darkModeToggle = document.querySelectorAll(".dark-mode-toggle");
 let toggleSlider = document.querySelector(".toggle-slider");
 let sectionConts = document.querySelectorAll(".section-cont");
 
@@ -127,89 +139,132 @@ let addSongLibraryFavoritesMessage = document.querySelector(".add-song-library-s
 let body = document.getElementsByTagName("body")[0];
 let logoutBtn = document.querySelector(".logout-btn")
 let logoutIcon = document.querySelector(".logout-icon")
+let darkModeActive = false;
 
-darkModeToggle.addEventListener("click", function(){
-  toggleSlider.classList.toggle("toggle-slider-on");
-
-  if(body.style.backgroundColor == "black"){
-    body.style.backgroundColor = "#e5e5e5";
-  }
-  else{
-    body.style.backgroundColor = "black";
-  }
-
-  mainCont.classList.toggle("main-cont-dark-mode-active");
-
-  sectionConts.forEach(cont=> {
-    cont.classList.toggle("section-cont-dark-mode-active");
-  })
-
-  optionsIcons.forEach(icon => {
-    icon.classList.toggle("icon-dark-mode-active")
-  })
-
-  songNames.forEach(songName => {
-    songName.classList.toggle("text-dark-mode-active")
-  })
-
-  searchBarConts.forEach(cont => {
-    cont.classList.toggle("searchbar-dark-mode-active")
-  })
-
-  searchIcons.forEach(icon => {
-    icon.classList.toggle("icon-dark-mode-active")
-  })
-
-  searchbars.forEach(searchbar => {
-    searchbar.classList.toggle("searchbar-input-dark-mode-active")
-  })
-
-  musicPlayer.classList.toggle("section-cont-dark-mode-active");
-
-  dmIcons.forEach(icon => {
-    icon.classList.toggle("icon-dark-mode-active")
-  })
-
-  dmText.forEach(text => {
-    text.classList.toggle("text-dark-mode-active")
-  })
-
-  sliders.forEach(slider => {
-    slider.classList.toggle("slider-dark-mode-active");
-    slider.classList.toggle("slider::-webkit-slider-thumb");
-  })
-
-  darkModeToggle.classList.toggle("toggle-dark-mode-active");
-
-  toggleSlider.classList.toggle("slider-dark-mode-active");
-
-  dmPopups.forEach(popup =>{
-    popup.classList.toggle("popup-dark-mode-active")
-  })
-
-  dmPopupBtns.forEach(btn =>{
-    btn.classList.toggle("toggle-dark-mode-active");
-  })
-
-  playlistPopup.classList.toggle("popup-dark-mode-active");
-
-  profileImg.classList.toggle("toggle-dark-mode-active");
-
-  addSongLibraryFavoritesMessage.classList.toggle("dm-text")
-  addSongLibraryFavoritesMessage.classList.toggle("popup-dark-mode-active")
-
-  logoutBtn.classList.toggle("logout-btn-dark-mode-active")
-
-  logoutIcon.classList.toggle("logout-icon-dark-mode-active")
-  console.log("hey");
-
-  mainHeader.classList.toggle("dark-mode-active");
-  mainNav.classList.toggle("dark-mode-active")
-  miniPlayer.classList.toggle("dark-mode-active")
-
-  navBtns.forEach(btn =>{
-    btn.classList.toggle("nav-btn-dark-mode-active")
+darkModeToggle.forEach(toggle =>{
+  toggle.addEventListener("click", function(){
+    if(darkModeActive == false){
+      darkModeActive = true
+    }
+    else{
+      darkModeActive = false
+    }
+    toggleSlider.classList.toggle("toggle-slider-on");
+  
+    if(body.style.backgroundColor == "black"){
+      body.style.backgroundColor = "#e5e5e5";
+    }
+    else{
+      body.style.backgroundColor = "black";
+    }
+  
+    mainCont.classList.toggle("main-cont-dark-mode-active");
+  
+    sectionConts.forEach(cont=> {
+      cont.classList.toggle("section-cont-dark-mode-active");
+    })
+  
+    optionsIcons.forEach(icon => {
+      icon.classList.toggle("icon-dark-mode-active")
+    })
+  
+    songNames.forEach(songName => {
+      songName.classList.toggle("text-dark-mode-active")
+    })
+  
+    searchBarConts.forEach(cont => {
+      cont.classList.toggle("searchbar-dark-mode-active")
+    })
+  
+    searchIcons.forEach(icon => {
+      icon.classList.toggle("icon-dark-mode-active")
+    })
+  
+    searchbars.forEach(searchbar => {
+      searchbar.classList.toggle("searchbar-input-dark-mode-active")
+    })
+  
+    musicPlayer.classList.toggle("section-cont-dark-mode-active");
+  
+    dmIcons.forEach(icon => {
+      icon.classList.toggle("icon-dark-mode-active")
+    })
+  
+    dmText.forEach(text => {
+      text.classList.toggle("text-dark-mode-active")
+    })
+  
+    sliders.forEach(slider => {
+      slider.classList.toggle("slider-dark-mode-active");
+      slider.classList.toggle("slider::-webkit-slider-thumb");
+    })
+  
+    darkModeToggle.forEach(toggle=>{
+      toggle.classList.toggle("toggle-dark-mode-active");
+    })
+  
+    toggleSlider.classList.toggle("slider-dark-mode-active");
+  
+    dmPopups.forEach(popup =>{
+      popup.classList.toggle("popup-dark-mode-active")
+    })
+  
+    dmPopupBtns.forEach(btn =>{
+      btn.classList.toggle("toggle-dark-mode-active");
+    })
+  
+    playlistPopup.classList.toggle("popup-dark-mode-active");
+  
+    profileImg.classList.toggle("toggle-dark-mode-active");
+  
+    addSongLibraryFavoritesMessage.classList.toggle("dm-text")
+    addSongLibraryFavoritesMessage.classList.toggle("popup-dark-mode-active")
+  
+    logoutBtn.classList.toggle("logout-btn-dark-mode-active")
+  
+    logoutIcon.classList.toggle("logout-icon-dark-mode-active")
+    console.log("hey");
+  
+    mainHeader.classList.toggle("dark-mode-active");
+    mainNav.classList.toggle("dark-mode-active")
+    miniPlayer.classList.toggle("dark-mode-active")
+  
+    if(darkModeActive){
+      navBtns.forEach(btn =>{
+        if(!btn.classList.contains("nav-btn-active")){
+          btn.classList.toggle("nav-btn-dark-mode-active")
+        }
+      })
+    }
+    else{
+      navBtns.forEach(btn =>{
+        if(!btn.classList.contains("nav-btn-active")){
+          btn.classList.toggle("nav-btn-dark-mode-active")
+        }
+      })
+    }
+  
+    if(darkModeActive){
+      navBtns.forEach(btn => {
+        btn.addEventListener("click", function(){
+          navBtns.forEach(btn => {
+            btn.classList.add("nav-btn-unactive");
+            btn.classList.add("nav-btn-dark-mode-active")
+          })
+          
+          btn.classList.remove("nav-btn-unactive")
+          btn.classList.remove("nav-btn-dark-mode-active")
+      
+          btn.classList.add("nav-btn-active")
+        
+        })
+      })
+    }
+    else{
+      
+    }
   })
 })
+
 
 

@@ -141,6 +141,9 @@
 .on{
   left: 4px;
 }
+.desktop-profile-modal{
+  display: none;
+}
 
 .toggle-slider{
   width: 25px;

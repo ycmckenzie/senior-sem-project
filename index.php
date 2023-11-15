@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="css/discover.css">
   <link rel="stylesheet" href="css/search.css">
   <link rel="stylesheet" href="css/profile.css">
+  <link rel="stylesheet" href="css/responsive.css">
 
   <title>Tuni</title>
 </head>
@@ -45,7 +46,7 @@
       </div>
 
       <div class="music-player-img-cont">
-        <img src="images/imgs/views.jpeg" alt="music-player-img" class="music-player-img">
+        <img src="" alt="music-player-img" class="music-player-img">
       </div>
 
       <div class="music-player-default-img-cont">
@@ -105,6 +106,33 @@
         <button class="dm-text add-song-playlist-submit-btn">Add to playlist</button>
       </div>
 
+    </div>
+
+    <div class="desktop-profile-modal section-cont">
+      <div class="profile-page-header desktop-profile-page-header">
+        <img src="images/svgs/back-arrow-icon.svg" alt="back-arrow-icon" class="dm-icon desktop-profile-back-arrow-icon" width="30px">
+        <p class="dm-text profile-header-title">Profile</p>
+      </div>
+
+      <div class="profile-img-cont desktop-profile-img-cont">
+        <div class="profile-img"></div>
+      </div>
+
+      <div class="dark-mode-toggle-cont">
+        <p class="dm-text dark-mode-message">Dark Mode</p>
+        <div class="dark-mode-toggle">
+          <div class="toggle-slider"></div>
+          <div class="dm-text off">Off</div>
+          <p class="dm-text on">On</p>
+        </div>
+      </div>
+
+      <form action="php/logout.php" method="POST" class="logout-btn-cont">
+        <button class="logout-btn">
+          <img src="images/svgs/logout-icon.svg" alt="" width="20px" class="logout-icon">
+          Log out
+        </button>
+      </form>
     </div>
 
     <div class="dm-text add-song-library-success-fail-message"></div>

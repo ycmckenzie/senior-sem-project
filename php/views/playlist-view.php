@@ -12,12 +12,12 @@
         ?>
           <div class="playlist">
             <div class="playlist-img-cont">
-              <img src="images/svgs/playlists-icon.svg" alt="playlist-img"class="playlist-img">
+              <img src="images/svgs/playlists-icon.svg" alt="playlist-img" class="playlist-img">
             </div>
   
             <p class="dm-text playlist-name"><?php echo $playlist["playlist_name"];?> </p>
   
-            <img src="images/svgs/right-arrow-icon.svg" alt="right-arrow" class="dm-icon">
+            <img src="images/svgs/right-arrow-icon.svg" alt="right-arrow" class="dm-icon playlist-btn-right-arrow">
   
             <div class="playlist-id"><?php echo $playlist["playlist_id"];?> </div>
           </div>
@@ -41,7 +41,7 @@
 
   $playlistSongs = requestPlaylistSongs($pdo, $userId);
 
-  function displayPlaylistSongs($playlistSongs){
+  function displayPlaylistSongs($playlistSongs, $pdo, $userId){
     foreach($playlistSongs as $playlistSong){
       ?>
         <div class="song-cont playlist-song-cont">
@@ -51,6 +51,16 @@
             <div class="playlist-song-content">
               <p class="dm-text playlist-song-name"><?php echo $playlistSong["song_name"];?> </p>
               <p class="playlist-song-artist"><?php echo $playlistSong["artist_name"];?></p>
+              <p class="dm-text song-genre playlist-song-genre"><?php echo $playlistSong["genre"]?></p>
+              <p class="dm-text song-plays playlist-song-plays"></p>
+
+              <?php
+                if(isPlaylistSongFavorited($pdo, $userId, $playlistSong["song_id"])){
+                  ?>
+                    <img src="images/svgs/red-heart-icon.svg" alt="heart-icon" class="library-song-heart song-heart" width="25px">
+                  <?php
+                }
+              ?>
             </div>
 
           <img src="images/svgs/elipsis-icon.svg" alt="" width="30px" class="elipsis-icon"> 
@@ -83,6 +93,20 @@
 
           <div class="song-playlist-id"><?php echo $playlistSong["playlist_id"];?> </div>
 
+          <div class="song-info">
+              <p class="dm-text song-info-id"><?php echo $playlistSong["song_id"];?></p>
+              <p class="dm-text song-favorited">
+                <?php
+                  if(isPlaylistSongFavorited($pdo, $userId, $playlistSong["song_id"])){
+                    echo "true";
+                  }
+                  else{
+                    echo "false";
+                  }
+                ?>
+              </p>
+            </div>
+
           <audio src="data:audio/mpeg;base64,<?php echo base64_encode($playlistSong["song_audio_file"]);?>" class="song-audio-src">
           </audio>
         </div>
@@ -91,24 +115,32 @@
   }
 
   function displaySelectionPlaylists($playlistsInfo){
-    foreach($playlistsInfo as $playlist){
+    if($playlistsInfo){
+      foreach($playlistsInfo as $playlist){
+        ?>
+          <div class="selection-playlist-cont">
+            <label for="<?php echo $playlist["playlist_id"]?>" class="selection-playlist-content">
+              <input type="radio" class="add-playlist-original-btn" name="playlist-id" value="<?php echo $playlist["playlist_id"]?>"
+                id = "<?php echo $playlist["playlist_id"]?>">
+  
+              <div class="add-playlist-custom-btn"></div>
+  
+              <div class="playlist-img-cont">
+                <img src="images/svgs/playlists-icon.svg" alt="playlist-img"class="playlist-img">
+              </div>
+              <p class="dm-text playlist-name"><?php echo $playlist["playlist_name"];?> </p>
+  
+            </label>
+          </div>
+        <?php
+      }
+    }
+    else{
       ?>
-        <div class="selection-playlist-cont">
-          <label for="<?php echo $playlist["playlist_id"]?>" class="selection-playlist-content">
-            <input type="radio" class="add-playlist-original-btn" name="playlist-id" value="<?php echo $playlist["playlist_id"]?>"
-              id = "<?php echo $playlist["playlist_id"]?>">
-
-            <div class="add-playlist-custom-btn"></div>
-
-            <div class="playlist-img-cont">
-              <img src="images/svgs/playlists-icon.svg" alt="playlist-img"class="playlist-img">
-            </div>
-            <p class="dm-text playlist-name"><?php echo $playlist["playlist_name"];?> </p>
-
-          </label>
-        </div>
+        <div class="dm-text no-selection-playlists-message">No Playlists</div>
       <?php
     }
+    
   }
 
 
