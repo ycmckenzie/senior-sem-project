@@ -58,6 +58,9 @@ let closeSections = document.querySelectorAll(".close-section")
 navBtns.forEach(btn => {
   btn.addEventListener("click", function(){
     mainHeader.style.display = "flex"
+    mainHeader.style.display = "flex";
+    mainCont.style.height = "100%";
+    mainCont.style.overflowY = "visible";
     closeSections.forEach(section => {
       section.style.display = "none"
     })
@@ -77,22 +80,35 @@ let libraryBtn = document.querySelector(".library-nav-btn");
 let playlistBtn = document.querySelector(".playlists-nav-btn");
 let discoverBtn = document.querySelector(".discover-nav-btn");
 let searchBtn = document.querySelector(".search-nav-btn");
+let desktopFavoritesBtn = document.querySelector(".favorites-nav-btn")
 
 let libraryCont = document.querySelector(".library-cont");
 let playlistPageCont = document.querySelector(".playlist-page-cont");
 let discoverPageCont = document.querySelector(".discover-page-cont");
 let searchPageCont = document.querySelector(".search-page-cont");
+let favoritesPageCont = document.querySelector(".favorites-page-cont")
 
 libraryBtn.addEventListener("click", function(){
   libraryCont.style.display = "flex";
   playlistPageCont.style.display = "none";
   discoverPageCont.style.display = "none";
   searchPageCont.style.display = "none";
+  favoritesPageCont.style.display = "none";
   window.scrollTo({top: 0})
 })
 
 playlistBtn.addEventListener("click", function(){
   playlistPageCont.style.display = "flex";
+  libraryCont.style.display = "none";
+  discoverPageCont.style.display = "none";
+  searchPageCont.style.display = "none";
+  favoritesPageCont.style.display = "none";
+  window.scrollTo({top: 0})
+})
+
+desktopFavoritesBtn.addEventListener("click", function(){
+  favoritesPageCont.style.display = "flex";
+  playlistPageCont.style.display = "none";
   libraryCont.style.display = "none";
   discoverPageCont.style.display = "none";
   searchPageCont.style.display = "none";
@@ -104,6 +120,7 @@ discoverBtn.addEventListener("click", function(){
   libraryCont.style.display = "none";
   playlistPageCont.style.display = "none";
   searchPageCont.style.display = "none";
+  favoritesPageCont.style.display = "none";
   window.scrollTo({top: 0})
 })
 
@@ -112,6 +129,7 @@ searchBtn.addEventListener("click", function(){
   libraryCont.style.display = "none";
   playlistPageCont.style.display = "none";
   discoverPageCont.style.display = "none";
+  favoritesPageCont.style.display = "none";
   window.scrollTo({top: 0})
 })
 
@@ -170,15 +188,18 @@ let librarySearchbarValue;
 let libraryNoResultsMessage = document.querySelector(".library-no-results-message")
 let numLibraryResults;
 
+let libraryEmptyMessage = document.querySelector(".no-library-songs-message")
+
 librarySearchbar.addEventListener("keyup", function(){
   librarySearchbarValue = (librarySearchbar.value).toLowerCase().trim();
   numLibraryResults = 0;
 
   librarySongs.forEach(song => {
     let songName = (song.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText).toLowerCase();
-    let songArtist = (song.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText).toLowerCase();
+    let songArtist = (song.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerText).toLowerCase();
+    let songGenre = (song.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.nextElementSibling.innerText).toLowerCase();
 
-    if(songName.includes(librarySearchbarValue) || songArtist.includes(librarySearchbarValue)){
+    if(songName.includes(librarySearchbarValue) || songArtist.includes(librarySearchbarValue) || songGenre.includes(librarySearchbarValue)){
       song.style.display = "flex";
       numLibraryResults++;
     }
@@ -202,6 +223,7 @@ librarySearchbar.addEventListener("keyup", function(){
     libraryNoResultsMessage.style.display = "none";
   }
 
+
 })
 
 
@@ -213,6 +235,29 @@ libraryXBtn.addEventListener("click", function(){
   librarySongs.forEach(song => {
     song.style.display = "flex";
   })
+})
+
+librarySearchbar.addEventListener("keyup", function(){
+  if(librarySearchbar.value.length > 0){
+    libraryEmptyMessage.style.display = "none";
+  }
+  else{
+    libraryEmptyMessage.style.display = "block";
+  }
+})
+
+librarySearchbar.addEventListener("keyup", function(){
+  if(librarySearchbar.value.length > 0){
+    libraryEmptyMessage.style.display = "none";
+  }
+  else{
+    libraryEmptyMessage.style.display = "block";
+  }
+
+  if(libraryEmptyMessage.style.display == "block"){
+    libraryNoResultsMessage.style.display = "none"
+  }
+  
 })
 
 //desktopLibrarySearchFunctionality
@@ -228,8 +273,8 @@ desktopLibrarySearchbar.addEventListener("keyup", function(){
 
   librarySongs.forEach(song => {
     let songName = (song.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText).toLowerCase();
-    let songArtist = (song.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.previousElementSibling.innerText).toLowerCase();
-    let songGenre = (song.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText).toLowerCase();
+    let songArtist = (song.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerText).toLowerCase();
+    let songGenre = (song.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.nextElementSibling.innerText).toLowerCase();
 
     if(songName.includes(desktopLibrarySearchbarValue) || songArtist.includes(desktopLibrarySearchbarValue) || songGenre.includes(desktopLibrarySearchbarValue)){
       song.style.display = "flex";
@@ -265,6 +310,8 @@ desktopLibraryXBtn.addEventListener("click", function(){
     song.style.display = "flex";
   })
 })
+
+
 
 
 //playing the song when a song is clicked, changing the image source of the miniplayer and music player to the image of the song
@@ -351,8 +398,8 @@ musicPlayerBackBtn.addEventListener("click", function(){
     musicPlayerImg.src = currentSong.firstElementChild.src;
     miniPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
     musicPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
-    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.previousElementSibling.innerText
-    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.previousElementSibling.innerText
+    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerText
+    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerText
 
     let newSongSrc = currentSong.lastElementChild.src;
     musicPlayerSong.src = newSongSrc;
@@ -376,8 +423,8 @@ musicPlayerSkipBtn.addEventListener("click", function(){
     musicPlayerImg.src = currentSong.firstElementChild.src;
     miniPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
     musicPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
-    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.previousElementSibling.innerText
-    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.previousElementSibling.innerText;
+    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerText
+    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerText;
 
     let newSongSrc = currentSong.lastElementChild.src;
     musicPlayerSong.src = newSongSrc;
@@ -388,6 +435,31 @@ musicPlayerSkipBtn.addEventListener("click", function(){
 
     miniPlayerPauseBtn.style.display = "block";
     miniPlayerPlayBtn.style.display = "none";
+  }
+})
+
+let miniPlayerBackBtn = document.querySelector(".mini-player-back-icon");
+
+miniPlayerBackBtn.addEventListener("click", function(){
+  if (currentSong && currentSong.previousElementSibling != null && currentSong.previousElementSibling.style.display != "none"){
+    let previousSong = currentSong.previousElementSibling;
+    currentSong = previousSong
+
+    miniPlayerImg.src = currentSong.firstElementChild.src;
+    musicPlayerImg.src = currentSong.firstElementChild.src;
+    miniPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
+    musicPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
+    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerText
+    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerText
+
+    let newSongSrc = currentSong.lastElementChild.src;
+    musicPlayerSong.src = newSongSrc;
+    musicPlayerPause.style.display = "block";
+    musicPlayerPlay.style.display = "none";
+
+    miniPlayerPauseBtn.style.display = "block";
+    miniPlayerPlayBtn.style.display = "none";
+    musicPlayerSong.play();
   }
 })
 
@@ -402,8 +474,8 @@ miniPlayerSkipBtn.addEventListener("click", function(){
     musicPlayerImg.src = currentSong.firstElementChild.src;
     miniPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
     musicPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
-    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.previousElementSibling.innerText
-    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.previousElementSibling.innerText
+    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerText
+    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerText
 
     let newSongSrc = currentSong.lastElementChild.src;
     musicPlayerSong.src = newSongSrc;
@@ -468,10 +540,19 @@ songProgressBar.addEventListener("input", function(){
 })
 
 let songVolume = document.querySelector(".song-volume");
+let miniPlayerVolume= document.querySelector(".mini-player-volume-slider");
 
 songVolume.addEventListener("input", function(){
   musicPlayerSong.volume = songVolume.value;
+  miniPlayerVolume.value = songVolume.value;
 })
+
+miniPlayerVolume.addEventListener("input", function(){
+  musicPlayerSong.volume = miniPlayerVolume.value;
+  songVolume.value = miniPlayerVolume.value;
+})
+
+
 
 //mini-player functionality
 
@@ -518,8 +599,13 @@ addToPlaylistBtns.forEach(btn => {
     mainNav.style.display = "none";
     mainHeader.style.display = "none";
 
+    mainCont.style.height = "100vh";
+    mainCont.style.overflowY = "hidden";
   })
 })
+
+
+
 
 
 
@@ -534,6 +620,9 @@ addToPlaylistPageBackBtn.addEventListener("click", function(){
   mainNav.style.display = "flex";
   mainHeader.style.display = "flex";
   addToPlaylistSuccessFailMessage.style.display = "none";
+
+  mainCont.style.height = "100%";
+  mainCont.style.overflowY = "visible";
 
   songPopups.forEach(popup => {
     popup.style.display = "none"
@@ -670,8 +759,8 @@ function playSong(){
     musicPlayerImg.src = currentSong.firstElementChild.src;
     miniPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
     musicPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
-    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.previousElementSibling.innerText
-    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.previousElementSibling.innerText
+    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerText
+    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerText
 
     musicPlayerSong.src = musicPlayerSongSrc
     musicPlayerSong.play();
@@ -683,8 +772,8 @@ function playSong(){
     musicPlayerImg.src = currentSong.firstElementChild.src;
     miniPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
     musicPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
-    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.previousElementSibling.innerText
-    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.previousElementSibling.innerText
+    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerText
+    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerText
 
     let musicPlayerSongSrc = currentSong.lastElementChild.src;
     musicPlayerSong.src = musicPlayerSongSrc;
@@ -712,7 +801,7 @@ function nextSong(){
   }
 }
 
-//hiding default image and text for miniplayer and music player
+//hiding default image and text for miniplayer and music player 
 libraryPlayIcon.addEventListener("click", function(){
   if(currentSong){
     miniPlayerDefaultImg.style.display = "none";
@@ -748,8 +837,8 @@ function playShuffledSongs(){
     musicPlayerImg.src = currentSong.firstElementChild.src;
     miniPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
     musicPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
-    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.previousElementSibling.innerText
-    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.previousElementSibling.innerText
+    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerText
+    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerText
 
     musicPlayerSong.src = musicPlayerSongSrc
     musicPlayerSong.play();
@@ -762,8 +851,8 @@ function playShuffledSongs(){
     musicPlayerImg.src = currentSong.firstElementChild.src;
     miniPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
     musicPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
-    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.previousElementSibling.innerText
-    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.previousElementSibling.innerText
+    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerText
+    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerText
 
     let musicPlayerSongSrc = currentSong.lastElementChild.src;
     musicPlayerSong.src = musicPlayerSongSrc;
@@ -811,7 +900,9 @@ libraryShuffleIcon.addEventListener("click", function(){
 
 
 
-//music play functionality
+//music player functionality
+
+//hiding and displaying music player heart based on 
 
 let musicPlayerAddFavoritesBtn = document.querySelector(".music-player-heart-icon");
 let musicPlayerRemoveFavoritesBtn = document.querySelector(".music-player-red-heart-icon");
@@ -825,3 +916,45 @@ musicPlayerRemoveFavoritesBtn.addEventListener("click", function(){
   musicPlayerAddFavoritesBtn.style.display = "block";
   musicPlayerRemoveFavoritesBtn.style.display = "none"
 })
+
+let modifyFavoritesBtns = document.querySelectorAll(".modify-favorites-btn")
+
+modifyFavoritesBtns.forEach(btn => {
+  btn.addEventListener("click", function(){
+    if(currentSong){
+      let songId = currentSong.lastElementChild.previousElementSibling.firstElementChild.innerText.trim();
+  
+      let params = "favoriteSongId=" + songId;
+  
+      let xhr = new XMLHttpRequest();
+      xhr.open('POST', 'php/ajax/modify-favorites.php', true);
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  
+      xhr.onload = function(){
+        console.log(this.responseText)
+      }
+  
+      xhr.send(params);
+      
+    }
+  })
+})
+
+
+//displaying red heart if a song is favorited
+
+musicPlayerSong.addEventListener("play", function(){
+  let isCurrentSongFavorited = currentSong.lastElementChild.previousElementSibling.lastElementChild.innerText.trim();
+  if(isCurrentSongFavorited == "true"){
+    musicPlayerRemoveFavoritesBtn.style.display = "block"
+    musicPlayerAddFavoritesBtn.style.display = "none"
+  }
+  else{
+    musicPlayerRemoveFavoritesBtn.style.display = "none"
+    musicPlayerAddFavoritesBtn.style.display = "block"
+  }
+})
+
+
+
+

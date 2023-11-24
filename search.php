@@ -9,6 +9,12 @@
     <img src="images/svgs/x-icon.svg" alt="x" class="dm-icon searchbar-x-btn" id="search-x-btn">
   </div>
 
+  <div class="desktop-library-searchbar-cont searchbar-cont">
+    <img src="images/svgs/search-icon.svg" alt="search-icon" width="20px" class="search-icon desktop-playlist-search-icon">
+    <input type="text" class="searchbar" id="desktop-search-searchbar" placeholder="Search for Songs">
+    <img src="images/svgs/x-icon.svg" alt="x" class="dm-icon searchbar-x-btn" id="desktop-search-x-btn">
+  </div>
+
   <div class="genre-cont">
     <div class="genre-btn pop-genre-btn">
       <p class="btn-text">Pop</p>
@@ -31,8 +37,14 @@
     </div>
   </div>
 
+  <div class="library-column-label-cont search-column-label-cont">
+    <div class="dm-text song-column">Song Name</div>
+    <div class="dm-text artist-column">Artist</div>
+    <div class="dm-text genre-column">Genre</div>
+  </div>
+
   <div class="search-songs-cont">
-    <?php displaySearchSongs($genreSongs);?>
+    <?php displaySearchSongs($genreSongs, $pdo, $userId);?>
   </div>
 
   <div class="dm-text search-no-results-message">No Results</div>
@@ -44,7 +56,7 @@
     </div>
 
     <div class="genre-songs-cont">
-        <?php displayGenreSongs($genreSongs);?>
+        <?php displayGenreSongs($genreSongs, $pdo, $userId);?>
     </div>
 
   </div>

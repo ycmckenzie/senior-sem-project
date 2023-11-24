@@ -33,6 +33,7 @@ createPlaylistBtnClose.addEventListener("click", function(){
   mainHeader.style.display = "flex";
 
   createPlaylistErrorMessage.style.display = "none";
+  createPlaylistSuccessMessage.style.display = "none";
 })
 
 //displaying the playlist page on playlist button click
@@ -73,6 +74,7 @@ createPlaylistForm.addEventListener("submit", createPlaylist);
 
 let createPlaylistInput = document.querySelector(".create-playlist-input");
 let createPlaylistErrorMessage = document.querySelector(".input-error-message");
+let createPlaylistSuccessMessage = document.querySelector(".input-success-message");
 
 function createPlaylist(e){
     e.preventDefault();
@@ -83,7 +85,8 @@ function createPlaylist(e){
   else{
     let playlistName = document.querySelector(".create-playlist-input").value;
     createPlaylistInput.value = "";
-    createPlaylistErrorMessage.style.display = "none";
+    createPlaylistErrorMessage.style.display = "none"
+    createPlaylistSuccessMessage.style.display = "block"
 
     let params = "playlistName=" + playlistName;
 
@@ -296,6 +299,8 @@ playlistOptionBtn.addEventListener("click", function(){
   playlistPagePopup.style.display = "block";
 })
 
+//playlist loop
+
 let playlistPlayIcon = document.querySelector("#playlist-play-icon");
 let playlistSongsCont = document.querySelector(".playlist-songs-cont");
 let currentPlaylistSongs = [];
@@ -329,8 +334,8 @@ function playPlaylistSong(currentPlaylistSongs, currIndex){
     musicPlayerImg.src = currentSong.firstElementChild.src;
     miniPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
     musicPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
-    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText
-    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText
+    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerText
+    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerText
 
     musicPlayerSong.src = musicPlayerSongSrc
     musicPlayerSong.play();
@@ -344,8 +349,8 @@ function playPlaylistSong(currentPlaylistSongs, currIndex){
     musicPlayerImg.src = currentSong.firstElementChild.src;
     miniPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
     musicPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
-    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText
-    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText
+    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerText
+    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerText
 
     let musicPlayerSongSrc = currentSong.lastElementChild.src;
     musicPlayerSong.src = musicPlayerSongSrc;
@@ -378,6 +383,103 @@ function nextPlaylistSong(currentPlaylistSongs, currIndex){
 }
 
 playlistPlayIcon.addEventListener("click", function(){
+  if(currentSong){
+    miniPlayerDefaultImg.style.display = "none";
+    miniPlayerDefaultMessage.style.display = "none";
+    miniPlayerImg.style.display = "block";
+    miniPlayerContent.style.display = "flex";
+
+    musicPlayerDefaultImg.style.display = "none";
+    musicPlayerDefaultMessage.style.display = "none";
+    musicPlayerImgCont.style.display = "block";
+    musicPlayerSongInfo.style.display = "block";
+  }
+})
+
+
+//playlist shuffle
+
+let playlistShuffleIcon = document.querySelector("#playlist-shuffle-icon");
+
+playlistShuffleIcon.addEventListener("click", startPlaylistShuffleLoop);
+
+function startPlaylistShuffleLoop() {
+  if(playlistSongsCont.firstElementChild.classList.contains("playlist-song-cont")){
+    currentSong = false;
+    musicPlayerSong.pause();
+
+    let allPlaylistSongs = document.querySelectorAll(".playlist-song-cont")
+    
+    for(let i = 0; i < allPlaylistSongs.length; i++){
+      if(allPlaylistSongs[i].style.display == "flex"){
+        currentPlaylistSongs.push(allPlaylistSongs[i])
+      }
+    }
+
+    playShuffledPlaylistSong(currentPlaylistSongs);
+
+    currentPlaylistSongs = [];
+  }
+  console.log("start")
+}
+
+function playShuffledPlaylistSong(currentPlaylistSongs){
+  if(currentSong){
+    let musicPlayerSongSrc = currentSong.lastElementChild.src;
+    miniPlayerImg.src = currentSong.firstElementChild.src;
+    musicPlayerImg.src = currentSong.firstElementChild.src;
+    miniPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
+    musicPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
+    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerText
+    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerText
+
+    musicPlayerSong.src = musicPlayerSongSrc
+    musicPlayerSong.play();
+    musicPlayerSong.addEventListener("ended", function(){
+      nextShuffledPlaylistSong(currentPlaylistSongs)
+    })
+  }
+  else{
+    let ranNum = Math.floor(Math.random() * currentPlaylistSongs.length)
+    currentSong = currentPlaylistSongs[ranNum];
+    miniPlayerImg.src = currentSong.firstElementChild.src;
+    musicPlayerImg.src = currentSong.firstElementChild.src;
+    miniPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
+    musicPlayerSongName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText
+    miniPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerText
+    musicPlayerArtistName.innerText = currentSong.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerText
+
+    let musicPlayerSongSrc = currentSong.lastElementChild.src;
+    musicPlayerSong.src = musicPlayerSongSrc;
+    musicPlayerSong.play();
+    
+    musicPlayerSong.addEventListener("ended", function(){
+      nextShuffledPlaylistSong(currentPlaylistSongs)
+    })
+
+    musicPlayerPause.style.display = "block";
+    musicPlayerPlay.style.display = "none";
+
+    miniPlayerPauseBtn.style.display = "block";
+    miniPlayerPlayBtn.style.display = "none";
+  }
+}
+
+function nextShuffledPlaylistSong(currentPlaylistSongs){
+  if(currentSong.classList.contains("playlist-song-cont")){
+    let ranNum = Math.floor(Math.random() * currentPlaylistSongs.length)
+    currentSong = currentPlaylistSongs[ranNum];
+    playShuffledPlaylistSong(currentPlaylistSongs);
+
+    musicPlayerPause.style.display = "block";
+    musicPlayerPlay.style.display = "none";
+
+    miniPlayerPauseBtn.style.display = "block";
+    miniPlayerPlayBtn.style.display = "none";
+  }
+}
+
+playlistShuffleIcon.addEventListener("click", function(){
   if(currentSong){
     miniPlayerDefaultImg.style.display = "none";
     miniPlayerDefaultMessage.style.display = "none";

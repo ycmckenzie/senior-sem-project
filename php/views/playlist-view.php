@@ -6,7 +6,7 @@
 
   $playlistsInfo = requestPlaylists($pdo, $userId);
 
-  function displayPlaylists($playlistsInfo){
+  function displayPlaylists($playlistsInfo, $pdo, $userId) {
     if($playlistsInfo){
       foreach($playlistsInfo as $playlist){
         ?>
@@ -16,6 +16,17 @@
             </div>
   
             <p class="dm-text playlist-name"><?php echo $playlist["playlist_name"];?> </p>
+            <p class="dm-text playlist-song-count">
+              <?php 
+                $count = requestPlaylistSongCount($pdo, $userId, $playlist["playlist_id"]); 
+                if($count == 1){
+                  echo $count . " song";
+                }
+                else{
+                  echo $count . " songs";
+                }
+              ?>
+            </p>
   
             <img src="images/svgs/right-arrow-icon.svg" alt="right-arrow" class="dm-icon playlist-btn-right-arrow">
   
@@ -52,7 +63,14 @@
               <p class="dm-text playlist-song-name"><?php echo $playlistSong["song_name"];?> </p>
               <p class="playlist-song-artist"><?php echo $playlistSong["artist_name"];?></p>
               <p class="dm-text song-genre playlist-song-genre"><?php echo $playlistSong["genre"]?></p>
-              <p class="dm-text song-plays playlist-song-plays"></p>
+
+              <?php
+                $date = explode(" ", $playlistSong["playlist_song_added_at"]);
+                $explodedDate = explode("-", $date[0]);
+                $reformattedDate = $explodedDate[1] . "-" . $explodedDate[2] . "-" . $explodedDate[0];
+              ?>
+
+              <p class="dm-text song-added playlist-song-added"><?php echo $reformattedDate?></p>
 
               <?php
                 if(isPlaylistSongFavorited($pdo, $userId, $playlistSong["song_id"])){
@@ -128,7 +146,7 @@
               <div class="playlist-img-cont">
                 <img src="images/svgs/playlists-icon.svg" alt="playlist-img"class="playlist-img">
               </div>
-              <p class="dm-text playlist-name"><?php echo $playlist["playlist_name"];?> </p>
+              <p class="dm-text selection-playlist-name playlist-name"><?php echo $playlist["playlist_name"];?> </p>
   
             </label>
           </div>

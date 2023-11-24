@@ -56,6 +56,7 @@ body{
   font-size: 25px;
   font-weight: bold;
 }
+
 .profile-icon{
   right: 10px;
   position: absolute;
@@ -64,6 +65,7 @@ body{
   transform: translateY(-50%);
   filter: invert(42%) sepia(55%) saturate(6611%) hue-rotate(220deg) brightness(93%) contrast(92%);
 }
+
 .desktop-profile-icon{
   display: none;
 }
@@ -298,9 +300,16 @@ body{
 .mini-player-btns{
   display: flex;
   gap: 4px;
+  justify-content: center;
 }
+
+.mini-player-volume-slider{
+  display: none;
+}
+
 .mini-player-pause-start-cont{
-  width: 35px;
+  width: 30px;
+  height: 35px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -309,6 +318,12 @@ body{
   display: none;
 }
 .mini-player-back-icon{
+  display: none;
+}
+.mini-player-volume-cont{
+  display: none;
+}
+.mini-player-up-icon{
   display: none;
 }
 
@@ -341,8 +356,17 @@ body{
   filter: invert(0%) sepia(95%) saturate(0%) hue-rotate(184deg) brightness(93%) contrast(102%);
 }
 
+.nav-btn-img-cont{
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+}
+
 .nav-btn-img{
   cursor: pointer;
+  width: 100%;
+  filter: invert(0%) sepia(99%) saturate(0%) hue-rotate(83deg) brightness(98%) contrast(102%);
 }
 
 .nav-btn-text{
@@ -416,6 +440,12 @@ body{
   filter: invert(42%) sepia(55%) saturate(6611%) hue-rotate(220deg) brightness(93%) contrast(92%);
 }
 
+.desktop-content-cont{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 .music-player-content{
   display: flex;
   width: 100%;
@@ -450,6 +480,7 @@ body{
 .music-player-red-heart-icon{
   filter: invert(12%) sepia(99%) saturate(7477%) hue-rotate(3deg) brightness(93%) contrast(121%);
   display: none;
+  cursor: pointer;
 }
 .music-player-controls{
   width: 100%;
@@ -524,6 +555,10 @@ body{
   height: 20px;
   border-radius: 50%;
   border: 5px solid var(--reg-grey);
+}
+
+.song-volume-icon{
+  filter: invert(57%) sepia(0%) saturate(2279%) hue-rotate(171deg) brightness(87%) contrast(91%);
 }
 
 .library-no-results-message{
@@ -654,5 +689,40 @@ body{
 
 .song-popup .unfavorite-btn{
   border-bottom: none;
+}
+
+.song-heart{
+  filter: invert(12%) sepia(99%) saturate(7477%) hue-rotate(3deg) brightness(93%) contrast(121%);
+  display: none;
+}
+
+.song-info{
+  display: none;
+}
+
+.username{
+  display: none;
+}
+
+.no-favorites-message{
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  margin-top: 200px;
+}
+
+.no-selection-playlists-message{
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.desktop-favorites-no-results-message{
+  display: none;
+}
+
+.song-added{
+  display: none;
 }
 

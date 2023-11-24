@@ -34,11 +34,15 @@ let favoritesPageBackBtn = document.querySelector(".favorites-page-back-btn")
 favoritesBtn.addEventListener("click", function(){
   favoritesPage.style.display = "flex";
   profilePageCont.style.padding = "0px";
+  miniPlayer.style.display = "flex";
+  mainNav.style.display = "flex";
 })
 
 favoritesPageBackBtn.addEventListener("click", function(){
   favoritesPage.style.display = "none";
   profilePageCont.style.padding = "0px 10px 0px 10px";
+  miniPlayer.style.display = "none";
+  mainNav.style.display = "none";
 })
 
 let addFavoritesBtns = document.querySelectorAll(".add-favorites-btn");
@@ -93,12 +97,12 @@ removeFavoritesBtns.forEach(btn => {
   })
 })
 
+
 let desktopProfileIcon = document.querySelector(".desktop-profile-icon");
 let desktopProfileModal = document.querySelector(".desktop-profile-modal");
 
 desktopProfileIcon.addEventListener("click", function(){
   desktopProfileModal.style.display = "flex";
-  console.log("clicked")
 })
 
 let desktopProfileBackBtn = document.querySelector(".desktop-profile-back-arrow-icon")
@@ -109,19 +113,9 @@ desktopProfileBackBtn.addEventListener("click", function(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 let darkModeToggle = document.querySelectorAll(".dark-mode-toggle");
 let toggleSlider = document.querySelector(".toggle-slider");
+let desktopToggleSlider = document.querySelector(".desktop-toggle-slider")
 let sectionConts = document.querySelectorAll(".section-cont");
 
 let songNames = document.querySelectorAll(".song-name");
@@ -134,12 +128,14 @@ let sliders = document.querySelectorAll(".slider");
 let dmPopups = document.querySelectorAll(".song-popup")
 let dmPopupBtns = document.querySelectorAll(".popup-btn")
 let playlistPopup = document.querySelector(".playlist-page-popup")
-let profileImg = document.querySelector(".profile-img")
+let profileImg = document.querySelectorAll(".profile-img")
 let addSongLibraryFavoritesMessage = document.querySelector(".add-song-library-success-fail-message")
 let body = document.getElementsByTagName("body")[0];
 let logoutBtn = document.querySelector(".logout-btn")
 let logoutIcon = document.querySelector(".logout-icon")
+let columnConts = document.querySelectorAll(".library-column-label-cont")
 let darkModeActive = false;
+let navBtnImgs = document.querySelectorAll(".nav-btn-img")
 
 darkModeToggle.forEach(toggle =>{
   toggle.addEventListener("click", function(){
@@ -149,8 +145,18 @@ darkModeToggle.forEach(toggle =>{
     else{
       darkModeActive = false
     }
+
     toggleSlider.classList.toggle("toggle-slider-on");
-  
+    desktopToggleSlider.classList.toggle("toggle-slider-on")
+    desktopProfileModal.classList.toggle("desktop-modal-dark-mode-active")
+
+    if(desktopProfileModal.style.borderColor === "white"){
+      desktopProfileModal.style.borderColor = "black"
+    }
+    else{
+      desktopProfileModal.style.borderColor = "white"
+    }
+   
     if(body.style.backgroundColor == "black"){
       body.style.backgroundColor = "#e5e5e5";
     }
@@ -204,6 +210,7 @@ darkModeToggle.forEach(toggle =>{
     })
   
     toggleSlider.classList.toggle("slider-dark-mode-active");
+    desktopToggleSlider.classList.toggle("slider-dark-mode-active")
   
     dmPopups.forEach(popup =>{
       popup.classList.toggle("popup-dark-mode-active")
@@ -215,7 +222,10 @@ darkModeToggle.forEach(toggle =>{
   
     playlistPopup.classList.toggle("popup-dark-mode-active");
   
-    profileImg.classList.toggle("toggle-dark-mode-active");
+    profileImg.forEach(img => {
+      img.classList.toggle("toggle-dark-mode-active");
+    })
+
   
     addSongLibraryFavoritesMessage.classList.toggle("dm-text")
     addSongLibraryFavoritesMessage.classList.toggle("popup-dark-mode-active")
@@ -223,46 +233,23 @@ darkModeToggle.forEach(toggle =>{
     logoutBtn.classList.toggle("logout-btn-dark-mode-active")
   
     logoutIcon.classList.toggle("logout-icon-dark-mode-active")
-    console.log("hey");
+
+    columnConts.forEach(column => {
+      if(column.style.borderColor === "white"){
+        column.style.borderColor = "black"
+      }
+      else{
+        column.style.borderColor = "white"
+      }
+    })
   
     mainHeader.classList.toggle("dark-mode-active");
     mainNav.classList.toggle("dark-mode-active")
     miniPlayer.classList.toggle("dark-mode-active")
-  
-    if(darkModeActive){
-      navBtns.forEach(btn =>{
-        if(!btn.classList.contains("nav-btn-active")){
-          btn.classList.toggle("nav-btn-dark-mode-active")
-        }
-      })
-    }
-    else{
-      navBtns.forEach(btn =>{
-        if(!btn.classList.contains("nav-btn-active")){
-          btn.classList.toggle("nav-btn-dark-mode-active")
-        }
-      })
-    }
-  
-    if(darkModeActive){
-      navBtns.forEach(btn => {
-        btn.addEventListener("click", function(){
-          navBtns.forEach(btn => {
-            btn.classList.add("nav-btn-unactive");
-            btn.classList.add("nav-btn-dark-mode-active")
-          })
-          
-          btn.classList.remove("nav-btn-unactive")
-          btn.classList.remove("nav-btn-dark-mode-active")
-      
-          btn.classList.add("nav-btn-active")
-        
-        })
-      })
-    }
-    else{
-      
-    }
+
+    navBtnImgs.forEach(img =>{
+      img.classList.toggle("icon-dark-mode-active")
+    })
   })
 })
 

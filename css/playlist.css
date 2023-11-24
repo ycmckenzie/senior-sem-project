@@ -84,6 +84,13 @@
   text-align: center;
   display: none;
 }
+.input-success-message{
+  font-size: 12px;
+  width: 100%;
+  text-align: center;
+  display: none;
+}
+
 .create-new-playlist-btn{
   width: 150px;
   border: none;
@@ -129,6 +136,9 @@
 .playlist-name{
   flex: 1;
   font-size: 15px;
+}
+.playlist-song-count{
+  display: none;
 }
 .playlist-id{
   display: none;

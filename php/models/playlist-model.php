@@ -110,14 +110,31 @@
     $query = "SELECT * FROM favorites WHERE users_id = :userId 
         AND song_id = :songId;";
   
-      $stmt = $pdo->prepare($query);
-  
-      $stmt->bindParam(":userId", $userId);
-      $stmt->bindParam(":songId", $songId);
-  
-      $stmt->execute();
-  
-      $result = $stmt->fetch(PDO::FETCH_ASSOC);
-  
-      return $result;
+    $stmt = $pdo->prepare($query);
+
+    $stmt->bindParam(":userId", $userId);
+    $stmt->bindParam(":songId", $songId);
+
+    $stmt->execute();
+
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $result;
+  }
+
+  function getPlaylistSongCount($pdo, $userId, $playlistId){
+    $query = "SELECT COUNT(playlist_song_id) AS count
+      FROM playlist_songs
+      WHERE users_id = :userId AND playlist_id = :playlistId;";
+    
+    $stmt = $pdo->prepare($query);
+
+    $stmt->bindParam(":userId", $userId);
+    $stmt->bindParam(":playlistId", $playlistId);
+
+    $stmt->execute();
+
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $result["count"];
   }

@@ -27,7 +27,7 @@
     <div class="dm-text song-column">Song Name</div>
     <div class="dm-text artist-column">Artist</div>
     <div class="dm-text genre-column">Genre</div>
-    <div class="dm-text plays-column">Plays</div>
+    <div class="dm-text added-column">Added</div>
   </div>
 
 

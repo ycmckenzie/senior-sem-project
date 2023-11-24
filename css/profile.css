@@ -10,6 +10,13 @@
   font-family: 'Poppins', sans-serif;
 }
 
+.favorites-page-cont{
+  display: none;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+}
+
 .profile-page-cont{
   width: 100%;
   height: 100vh;
@@ -58,7 +65,16 @@
   border-radius: 50%;
   width: 150px;
   height: 150px;
+  overflow: hidden;
+  position: relative;
 }
+
+.profile-icon-img{
+  position: absolute;
+  bottom: -20px;
+  filter: invert(0%) sepia(100%) saturate(20%) hue-rotate(342deg) brightness(98%) contrast(100%);
+}
+
 .profile-content{
   width: 100%;
   text-align: center;
@@ -145,6 +161,10 @@
   display: none;
 }
 
+.desktop-modal-dark-mode-active{
+  background-color: black;
+}
+
 .toggle-slider{
   width: 25px;
   height: 25px;
@@ -225,7 +245,7 @@
   flex-direction: column;
   gap: 10px;
   overflow-y: scroll;
-  min-height: 100vh;
+  margin-bottom: 135px;
 }
 
 .main-cont-dark-mode-active{
@@ -253,6 +273,16 @@
 
 .toggle-dark-mode-active{
   border-color: white;
+}
+
+.white-border{
+  border-bottom: 2px solid white;
+}
+
+.mobile-favorites-no-results-message{
+  display: none;
+  font-weight: bold;
+  margin-top: 50px;
 }
 
 .slider-dark-mode-active{

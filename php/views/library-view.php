@@ -21,8 +21,15 @@
                 <p class="song-name"><?php echo $song["song_name"];?> </p>
                 <p class="song-artist"><?php echo $song["artist_name"];?></p>
                 <p class="dm-text song-genre"><?php echo $song["genre"];?></p>
-                <p class="dm-text song-plays"><?php echo $song["num_plays"];?></p>
 
+                <?php
+                  $date = explode(" ", $song["library_song_added_at"]);
+                  $explodedDate = explode("-", $date[0]);
+                  $reformattedDate = $explodedDate[1] . "-" . $explodedDate[2] . "-" . $explodedDate[0];
+                ?>
+
+                <p class="dm-text song-added"><?php echo $reformattedDate; ?></p>
+                
                 <?php
                   if(isLibrarySongFavorited($pdo, $userId, $song["song_id"])){
                     ?>

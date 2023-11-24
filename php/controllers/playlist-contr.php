@@ -34,3 +34,7 @@
   function isPlaylistSongFavorited($pdo, $userId, $songId){
     return checkPlaylistSongFavorited($pdo, $userId, $songId);
   }
+
+  function requestPlaylistSongCount($pdo, $userId, $playlistId){
+    return getPlaylistSongCount($pdo, $userId, $playlistId);
+  }

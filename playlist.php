@@ -20,7 +20,7 @@
   </div>
 
   <div class="playlist-btns-cont">
-    <?php displayPlaylists($playlistsInfo); ?>
+    <?php displayPlaylists($playlistsInfo, $pdo, $userId); ?>
   </div>
 
   <div class="dm-text playlist-no-results-message">
@@ -36,6 +36,7 @@
       <label for="new-playlist-input" class="create-prompt dm-text">Create new playlist: </label>
       <input type="text" name="new-playlist-input" placeholder="Playlist Name" class="searchbar create-playlist-input">
       <p class="input-error-message dm-text">Must create playlist name!</p>
+      <p class="input-success-message dm-text">Successfully created!</p>
       <button class="create-new-playlist-btn">Create</button>
     </div>
   </form>
@@ -84,6 +85,7 @@
       <div class="dm-text song-column">Song Name</div>
       <div class="dm-text artist-column">Artist</div>
       <div class="dm-text genre-column">Genre</div>
+      <div class="dm-text added-column playlist-added-column">Added</div>
     </div>
     
     <div class="playlist-songs-cont">

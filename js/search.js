@@ -42,7 +42,7 @@ genreBtns.forEach(btn => {
     currentGenre = btn.firstElementChild.innerText;
 
     genreSongs.forEach(song => {
-      if (song.lastElementChild.previousElementSibling.innerText == currentGenre){
+      if (song.lastElementChild.previousElementSibling.previousElementSibling.innerText == currentGenre){
         song.style.display = "flex";
       }
       else{
@@ -60,17 +60,16 @@ let genreBtnCont = document.querySelector(".genre-cont");
 let searchSongCont = document.querySelector(".search-songs-cont");
 let searchSongs = document.querySelectorAll(".search-song-cont");
 let searchSearchbarValue;
-let noResultsMessage = document.querySelector(".search-no-results-message")
+let searchNoResultsMessage = document.querySelector(".search-no-results-message")
 let numResults;
 
 searchSearchbar.addEventListener("keyup", function(){
   searchSearchbarValue = (searchSearchbar.value).toLowerCase().trim();
   numResults = 0;
-  console.log(searchSearchbarValue)
   searchSongs.forEach(song => {
     let songName = (song.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText).toLowerCase();
-    let songArtist = (song.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.previousElementSibling.innerText).toLowerCase();
-    let songGenre = (song.firstElementChild.nextElementSibling.nextElementSibling.lastElementChild.innerText).toLowerCase();
+    let songArtist = (song.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerText).toLowerCase();
+    let songGenre = (song.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.nextElementSibling.innerText).toLowerCase();
 
     if(songName.includes(searchSearchbarValue) || songArtist.includes(searchSearchbarValue) || songGenre.includes(searchSearchbarValue)){
       song.style.display = "flex";
@@ -85,7 +84,7 @@ searchSearchbar.addEventListener("keyup", function(){
       searchXBtn.style.display = "none";
       genreBtnCont.style.display = "flex";
       searchSongCont.style.display = "none";
-      noResultsMessage.style.display = "none";
+      searchNoResultsMessage.style.display = "none";
     }
     else{
       searchXBtn.style.display = "block";
@@ -94,23 +93,80 @@ searchSearchbar.addEventListener("keyup", function(){
     }
 
   if(numResults == 0){
-    noResultsMessage.style.display = "block";
+    searchNoResultsMessage.style.display = "block";
   }
   else{
-    noResultsMessage.style.display = "none";
+    searchNoResultsMessage.style.display = "none";
   }
 
 })
-
-
 
 searchXBtn.addEventListener("click", function(){
   searchXBtn.style.display = "none";
   genreBtnCont.style.display = "flex";
   searchSongCont.style.display = "none";
   searchSearchbar.value = "";
-  noResultsMessage.style.display = "none"
+  searchNoResultsMessage.style.display = "none"
 })
+
+
+//desktop search bar functionality
+
+let desktopSearchSearchbar = document.querySelector("#desktop-search-searchbar");
+let desktopSearchXBtn = document.querySelector("#desktop-search-x-btn");
+let desktopSearchSearchbarValue;
+let numDesktopSearchResults;
+let searchColumns = document.querySelector(".search-column-label-cont")
+
+desktopSearchSearchbar.addEventListener("keyup", function(){
+  desktopSearchSearchbarValue = (desktopSearchSearchbar.value).toLowerCase().trim();
+  numDesktopSearchResults = 0;
+  searchSongs.forEach(song => {
+    let songName = (song.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerText).toLowerCase();
+    let songArtist = (song.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerText).toLowerCase();
+    let songGenre = (song.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.nextElementSibling.innerText).toLowerCase();
+
+    if(songName.includes(desktopSearchSearchbarValue) || songArtist.includes(desktopSearchSearchbarValue) || songGenre.includes(desktopSearchSearchbarValue)){
+      song.style.display = "flex";
+      numDesktopSearchResults++;
+    }
+    else{
+      song.style.display = "none";
+    }
+  })
+
+    if(desktopSearchSearchbarValue.length <= 0){
+      desktopSearchXBtn.style.display = "none";
+      genreBtnCont.style.display = "flex";
+      searchSongCont.style.display = "none";
+      searchNoResultsMessage.style.display = "none";
+      searchColumns.style.display = "none";
+    }
+    else{
+      desktopSearchXBtn.style.display = "block";
+      genreBtnCont.style.display = "none";
+      searchSongCont.style.display = "flex";
+      searchColumns.style.display = "flex";
+    }
+
+  if(numDesktopSearchResults == 0){
+    searchNoResultsMessage.style.display = "block";
+  }
+  else{
+    searchNoResultsMessage.style.display = "none";
+  }
+
+})
+
+desktopSearchXBtn.addEventListener("click", function(){
+  desktopSearchXBtn.style.display = "none";
+  genreBtnCont.style.display = "flex";
+  searchSongCont.style.display = "none";
+  desktopSearchSearchbar.value = "";
+  searchNoResultsMessage.style.display = "none";
+  searchColumns.style.display = "none";
+})
+
 
 
 

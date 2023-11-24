@@ -11,7 +11,7 @@
 }
 
 body{
-  background-color: white;
+  background-color: var(--main-blue);
 }
 
 .su-cont, .li-cont{
@@ -19,6 +19,10 @@ body{
   flex-direction: column;
   width: 320px;
   margin: auto;
+  background-color: white;
+  height: 600px;
+  margin-top: 50px;
+  border-radius: 5px;
 }
 
 .su-header, .li-header{
@@ -82,4 +86,8 @@ body{
   width: 90%;
   text-align: left;
   font-size: 13px;
+}
+
+.su-li-img-cont{
+  display: none;
 }

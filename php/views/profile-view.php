@@ -6,7 +6,7 @@
 
   $userInfo = requestUserInfo($pdo, $userId);
 
-  $date = substr($userInfo["created_at"], 0, 10);
+  $date = substr($userInfo["user_created_at"], 0, 10);
 
   $dateTime = new DateTime($date);
   $joinedDate = $dateTime->format("F Y");
@@ -31,6 +31,16 @@
               <div class="song-content">
                 <p class="song-name"><?php echo $favoriteSong["song_name"];?> </p>
                 <p class="song-artist"><?php echo $favoriteSong["artist_name"];?></p>
+                <p class="dm-text song-genre favorites-song-genre"><?php echo $favoriteSong["genre"];?></p>
+
+                <?php
+                  $date = explode(" ", $favoriteSong["favorite_added_at"]);
+                  $explodedDate = explode("-", $date[0]);
+                  $reformattedDate = $explodedDate[1] . "-" . $explodedDate[2] . "-" . $explodedDate[0];
+                ?>
+                <p class="dm-text song-added favorites-song-added"><?php echo $reformattedDate?></p>
+
+                <img src="images/svgs/red-heart-icon.svg" alt="heart-icon" class="profile-song-heart song-heart" width="25px">
               </div>
   
             <img src="images/svgs/elipsis-icon.svg" alt="" width="30px" class="elipsis-icon"> 
@@ -53,6 +63,11 @@
                 <p class="dm-text">Unfavorite</p>
               </div>
             </div>
+
+            <div class="song-info">
+              <p class="dm-text song-info-id"><?php echo $favoriteSong["song_id"];?></p>
+              <p class="dm-text song-favorited">true</p>
+            </div>
   
             <audio src="data:audio/mpeg;base64,<?php echo base64_encode($favoriteSong["song_audio_file"]);?>" class="song-audio-src">
             </audio>
@@ -62,7 +77,7 @@
     }
     else{
       ?>
-        <div class="no-favorites-message">No favorites</div>
+        <div class="dm-text no-favorites-message">No favorites</div>
       <?php
     }
   }

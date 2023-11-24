@@ -5,7 +5,7 @@
 
   $genreSongs = requestGenreSongs($pdo);
 
-  function displaySearchSongs($genreSongs){
+  function displaySearchSongs($genreSongs, $pdo, $userId){
     foreach($genreSongs as $song){
       ?>
         <div class="song-cont search-song-cont">
@@ -17,6 +17,13 @@
               <p class="song-name search-song-name"><?php echo $song["song_name"];?> </p>
               <p class="song-artist search-song-artist"><?php echo $song["artist_name"];?></p>
               <p class="dm-text song-genre search-song-genre"><?php echo $song["genre"];?></p>
+              <?php
+                if(isSearchSongFavorited($pdo, $userId, $song["song_id"])){
+                  ?>
+                    <img src="images/svgs/red-heart-icon.svg" alt="heart-icon" class="library-song-heart song-heart" width="25px">
+                  <?php
+                }
+              ?>
             </div>
 
           <img src="images/svgs/elipsis-icon.svg" alt="" width="30px" class="elipsis-icon"> 
@@ -46,6 +53,20 @@
             </div>
           </div>
 
+          <div class="song-info">
+            <p class="dm-text song-info-id"><?php echo $song["song_id"];?></p>
+            <p class="dm-text song-favorited">
+              <?php
+                if(isSearchSongFavorited($pdo, $userId, $song["song_id"])){
+                  echo "true";
+                }
+                else{
+                  echo "false";
+                }
+              ?>
+            </p>
+          </div>
+
           <audio src="data:audio/mpeg;base64,<?php echo base64_encode($song["song_audio_file"]);?>" class="song-audio-src">
           </audio>
         </div>
@@ -53,7 +74,7 @@
     }
   }
   
-  function displayGenreSongs($genreSongs){
+  function displayGenreSongs($genreSongs, $pdo, $userId){
     foreach($genreSongs as $song){
       ?>
         <div class="song-cont genre-song-cont">
@@ -66,6 +87,13 @@
               <p class="song-name genre-song-name"><?php echo $song["song_name"];?> </p>
               <p class="song-artist genre-song-artist"><?php echo $song["artist_name"];?></p>
               <p class="dm-text song-genre genre-song-genre"><?php echo $song["genre"];?></p>
+              <?php
+                if(isSearchSongFavorited($pdo, $userId, $song["song_id"])){
+                  ?>
+                    <img src="images/svgs/red-heart-icon.svg" alt="heart-icon" class="library-song-heart song-heart" width="25px">
+                  <?php
+                }
+              ?>
             </div>
 
           <img src="images/svgs/elipsis-icon.svg" alt="" width="30px" class="elipsis-icon"> 
@@ -96,6 +124,20 @@
           </div>
 
           <p class="genre-song-genre"><?php echo $song["genre"];?></p>
+
+          <div class="song-info">
+            <p class="dm-text song-info-id"><?php echo $song["song_id"];?></p>
+            <p class="dm-text song-favorited">
+              <?php
+                if(isSearchSongFavorited($pdo, $userId, $song["song_id"])){
+                  echo "true";
+                }
+                else{
+                  echo "false";
+                }
+              ?>
+            </p>
+          </div>
 
           <audio src="data:audio/mpeg;base64,<?php echo base64_encode($song["song_audio_file"]);?>" class="song-audio-src">
           </audio>
